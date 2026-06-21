@@ -1,0 +1,268 @@
+{
+    "meta": {
+        "generated": "2026-06-21",
+        "sources": [
+            "github.com/Awadul",
+            "linkedin.com/in/muhammad-awais-abdullah-0a588b330",
+            "memory"
+        ]
+    },
+    "personal": {
+        "name": "Muhammad Awais Abdullah",
+        "handle": "Awadul",
+        "title": "AI Engineer & Full-Stack Developer",
+        "tagline": "REST APIs that don't break. Real-time systems that scale. Readable code. No shortcuts. Ships fast. No corners cut.",
+        "bio": "Learning new technologies and integrating solutions for businesses. Always thinking about automating stuff and reducing the burden from the head.",
+        "location": "Islamabad / Rawalpindi, Pakistan",
+        "timezone": "PKT (UTC+5)",
+        "email": "awaisabdullahm79@gmail.com",
+        "phone": "03437836578",
+        "availability": "Open to internships, freelance projects, and part-time remote roles"
+    },
+    "links": {
+        "github": "https://github.com/Awadul",
+        "linkedin": "https://www.linkedin.com/in/muhammad-awais-abdullah-0a588b330",
+        "email": "mailto:awaisabdullahm79@gmail.com"
+    },
+    "education": {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "National University of Sciences and Technology (NUST)",
+        "location": "H-12, Islamabad, Pakistan",
+        "semester": 7,
+        "gpa": 3.01,
+        "expectedGraduation": 2027,
+        "startYear": 2023
+    },
+    "skills": {
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "C++"
+        ],
+        "frontend": [
+            "React",
+            "Next.js",
+            "Tailwind CSS",
+            "Framer Motion"
+        ],
+        "backend": [
+            "Node.js",
+            "Express",
+            "Prisma"
+        ],
+        "databases": [
+            "PostgreSQL",
+            "MongoDB",
+            "Supabase"
+        ],
+        "ai_ml": [
+            "OpenAI API",
+            "RAG systems",
+            "TF-IDF",
+            "MinHash LSH",
+            "SimHash"
+        ],
+        "devops_infra": [
+            "Docker",
+            "Linux",
+            "Git",
+            "GitHub Actions"
+        ],
+        "tools": [
+            "GitHub Copilot",
+            "Claude AI",
+            "Postman",
+            "VS Code"
+        ]
+    },
+    "availableFor": [
+        "Backend engineering",
+        "Full-stack development",
+        "AI / LLM integrations",
+        "Real-time systems"
+    ],
+    "experience": [
+        {
+            "type": "freelance",
+            "role": "Freelance Developer",
+            "startDate": "2025-01",
+            "current": true,
+            "description": "Full-stack development and AI integration projects for clients. Built production systems including a freight CRM and AI-powered CV processing platform."
+        },
+        {
+            "type": "internship",
+            "company": "RADWI Electronics",
+            "companyUrl": "https://rad-wi.com",
+            "role": "Web Development Intern",
+            "location": "NSTP, NUST H-12, Islamabad (Remote-friendly)",
+            "description": "Leading full website redesign. Conducted full site audit, built design system using Tailwind CSS and Framer Motion. Currently in Phase 3 — homepage buildout.",
+            "startDate": "2025",
+            "current": true,
+            "tech": [
+                "Next.js",
+                "Tailwind CSS",
+                "Framer Motion"
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "id": "ai-cv-platform",
+            "name": "AI CV Processing Platform",
+            "shortDescription": "Automated resume parsing and applicant scoring pipeline for client recruitment at scale.",
+            "longDescription": "Production system handling unstructured PDF input, extracting structured candidate data, and ranking applicants against job criteria — fully automated, no human review required.",
+            "url": "https://cv.commit-offshore.com",
+            "visibility": "private",
+            "status": "production",
+            "tech": [
+                "Next.js",
+                "OpenAI API",
+                "PostgreSQL",
+                "Supabase"
+            ],
+            "category": "AI / Automation"
+        },
+        {
+            "id": "cargo-express-crm",
+            "name": "Cargo Express Freight CRM",
+            "shortDescription": "Custom CRM for a freight and logistics company managing shipments and client operations.",
+            "url": "https://shipidx.com",
+            "visibility": "private",
+            "status": "production",
+            "tech": [
+                "React",
+                "Node.js",
+                "Express",
+                "PostgreSQL"
+            ],
+            "category": "Full-Stack / Business"
+        },
+        {
+            "id": "round-table-learning",
+            "name": "Round Table Learning",
+            "shortDescription": "Full-stack web platform for an educational service.",
+            "url": "https://roundtablelearning.com",
+            "visibility": "public",
+            "status": "production",
+            "tech": [
+                "Next.js",
+                "Node.js",
+                "PostgreSQL"
+            ],
+            "category": "Full-Stack / EdTech"
+        },
+        {
+            "id": "pixal-craft",
+            "name": "Pixal Craft",
+            "shortDescription": "Creative web application with a polished UI.",
+            "url": "https://pixal-craft.vercel.app",
+            "githubUrl": "https://github.com/Awadul/PixalCraft",
+            "visibility": "public",
+            "status": "live",
+            "tech": [
+                "JavaScript",
+                "React"
+            ],
+            "category": "Frontend / Creative",
+            "stars": 1
+        },
+        {
+            "id": "nust-rag-bot",
+            "name": "NUST Student Guide Bot",
+            "shortDescription": "RAG-based chatbot over NUST's entire policy document corpus with a custom hybrid retrieval pipeline.",
+            "longDescription": "Built a custom retrieval pipeline using TF-IDF for keyword precision, MinHash LSH and SimHash for fuzzy semantic matching — no off-the-shelf vector DB. Academic Big Data semester project.",
+            "githubUrl": "https://github.com/Awadul/NUST-Policy-Document-RAG-System",
+            "visibility": "public",
+            "status": "academic",
+            "tech": [
+                "Python",
+                "TF-IDF",
+                "MinHash LSH",
+                "SimHash"
+            ],
+            "category": "AI / NLP",
+            "collaborators": [
+                "Sajjad Ur Rehman",
+                "Nafeel Mannan"
+            ]
+        },
+        {
+            "id": "sql-interpreter",
+            "name": "SQL Online Interpreter",
+            "shortDescription": "Browser-based SQL interpreter for writing and running queries online.",
+            "githubUrl": "https://github.com/Awadul/Sql_Online_Interpreter",
+            "visibility": "public",
+            "status": "live",
+            "tech": [
+                "JavaScript"
+            ],
+            "category": "Developer Tools"
+        },
+        {
+            "id": "asmf-load-balancer",
+            "name": "ASMF Load Balancing Algorithm",
+            "shortDescription": "Adaptive-Sampled Marginal Feedback — a scalable hybrid load balancing algorithm.",
+            "githubUrl": "https://github.com/Awadul/Adaptive-Sampled-Marginal-Feedback-ASMF-A-Scalable-Hybrid-Load-Balancing-Algorithm",
+            "visibility": "public",
+            "status": "research",
+            "tech": [
+                "Python"
+            ],
+            "category": "Systems / Research"
+        },
+        {
+            "id": "network-anomaly-detection",
+            "name": "Boosted Network Anomaly Detection",
+            "shortDescription": "ML-based network anomaly detection system.",
+            "githubUrl": "https://github.com/Awadul/Boosted-Network-Anomaly-Detection-",
+            "visibility": "public",
+            "status": "academic",
+            "tech": [
+                "Python",
+                "HTML"
+            ],
+            "category": "ML / Security"
+        },
+        {
+            "id": "pokecatcher-bot",
+            "name": "PokeCatcher BOT",
+            "shortDescription": "Discord selfbot with event-driven architecture for automated Pokémon catching across servers.",
+            "longDescription": "Monitors Discord gateway events, identifies spawn messages, and fires catch commands with configurable delays and priority lists.",
+            "githubUrl": "https://github.com/Awadul/PokeCatcher_BOT",
+            "visibility": "public",
+            "status": "live",
+            "tech": [
+                "JavaScript",
+                "Node.js",
+                "Discord.js"
+            ],
+            "category": "Automation / Fun"
+        }
+    ],
+    "githubStats": {
+        "username": "Awadul",
+        "profileUrl": "https://github.com/Awadul",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/143254491?v=4",
+        "publicRepos": 28,
+        "followers": 2,
+        "following": 5,
+        "achievements": [
+            "YOLO",
+            "Pull Shark"
+        ]
+    },
+    "applications": {
+        "activeInternships": [
+            "RADWI"
+        ],
+        "pending": [
+            "Techsnip",
+            "Arachnix",
+            "LexamAI",
+            "Royal Cyber",
+            "LMKR",
+            "Grayhat"
+        ]
+    }
+}

@@ -2,42 +2,47 @@ import { motion, AnimatePresence } from 'motion/react'
 import { useState } from 'react'
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react'
 
+// Data extracted exactly from PersonalInfo.json
 const projects = [
   {
-    id: 1,
-    title: 'Analytics Dashboard',
-    description: 'A comprehensive analytics platform with real-time data visualization and interactive charts.',
-    image: 'https://images.unsplash.com/photo-1665470909939-959569b20021?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3ZWIlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzU4MDc4OTczfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tech: ['React', 'D3.js', 'Node.js', 'MongoDB'],
-    link: '#',
-    github: '#'
+    id: 'ai-cv',
+    title: 'AI CV Platform',
+    shortDescription: 'Automated resume parsing and applicant scoring pipeline for client recruitment at scale.',
+    longDescription: 'Fully automated production system that extracts candidate data from PDFs and ranks applicants against job criteria.',
+    tech: ['Next.js', 'OpenAI API', 'PostgreSQL', 'Supabase'],
+    link: 'https://cv.commit-offshore.com',
+    github: null,
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMGRhdGF8ZW58MXx8fHwxNzU4MDc4OTczfDA&ixlib=rb-4.1.0&q=80&w=1080'
   },
   {
-    id: 2,
-    title: 'Mobile Banking App',
-    description: 'Secure and intuitive mobile banking application with biometric authentication and smart notifications.',
-    image: 'https://images.unsplash.com/photo-1658953229625-aad99d7603b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzU4MDk3NDIyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tech: ['React Native', 'TypeScript', 'Firebase', 'Stripe'],
-    link: '#',
-    github: '#'
+    id: 'cargo-crm',
+    title: 'Cargo Express Freight CRM',
+    shortDescription: 'Custom CRM for a freight and logistics company managing shipments and client operations.',
+    longDescription: 'A complete logistics management system built for production. Handles complex shipment workflows, customer accounting, and operational synchronization.',
+    tech: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+    link: 'https://shipidx.com',
+    github: null,
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c15944?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb2dpc3RpY3MlMjBzaGlwcGluZ3xlbnwxfHx8fDE3NTgxMTE0MjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
   },
   {
-    id: 3,
-    title: 'E-commerce Platform',
-    description: 'Modern e-commerce solution with advanced filtering, wishlist functionality, and seamless checkout.',
-    image: 'https://images.unsplash.com/photo-1658297063569-162817482fb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWJzaXRlfGVufDF8fHx8MTc1ODExMTQyM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tech: ['Next.js', 'Tailwind CSS', 'PostgreSQL', 'PayPal'],
-    link: '#',
-    github: '#'
+    id: 'nust-bot',
+    title: 'NUST Student Guide Bot',
+    shortDescription: "RAG-based chatbot over NUST's entire policy document corpus with a custom hybrid retrieval pipeline.",
+    longDescription: 'Built a custom retrieval pipeline using TF-IDF for keyword precision, MinHash LSH and SimHash for fuzzy semantic matching — no off-the-shelf vector DB. Academic Big Data semester project.',
+    tech: ['Python', 'TF-IDF', 'MinHash LSH', 'SimHash'],
+    link: null,
+    github: 'https://github.com/Awadul/NUST-Policy-Document-RAG-System',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBSSUyMGNoYXRib3R8ZW58MXx8fHwxNzU4MTA2MzY0fDA&ixlib=rb-4.1.0&q=80&w=1080'
   },
   {
-    id: 4,
-    title: 'Portfolio Website',
-    description: 'Creative portfolio website with smooth animations and interactive elements.',
-    image: 'https://images.unsplash.com/photo-1746397545445-f6086889ccc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3J0Zm9saW8lMjBkZXNpZ258ZW58MXx8fHwxNzU4MTA2MzY0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tech: ['React', 'Framer Motion', 'Three.js', 'GSAP'],
-    link: '#',
-    github: '#'
+    id: 'pixal-craft',
+    title: 'Pixal Craft',
+    shortDescription: 'Creative web application with a polished UI.',
+    longDescription: 'A highly interactive and visually polished frontend creative application, demonstrating expertise in DOM manipulation and React-based interface design.',
+    tech: ['JavaScript', 'React'],
+    link: 'https://pixal-craft.vercel.app',
+    github: 'https://github.com/Awadul/PixalCraft',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1aSUyMGRlc2lnbnxlbnwxfHx8fDE3NTgxMTE0MjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
   }
 ]
 
@@ -52,149 +57,131 @@ export function ProjectCarousel() {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
   }
 
-  const getVisibleProjects = () => {
-    const visible = []
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % projects.length
-      visible.push({
-        ...projects[index],
-        position: i
-      })
-    }
-    return visible
-  }
+  const currentProject = projects[currentIndex]
 
   return (
-    <section id="projects" className="py-20 bg-background overflow-hidden">
-      <div className="container mx-auto px-6">
-        <motion.h2
-          className="text-4xl md:text-5xl text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Featured Projects
-        </motion.h2>
+    <section id="projects" className="h-screen w-full relative bg-neutral-void overflow-hidden text-blue-ice flex items-center">
+      
+      {/* Geometric Architectural Shapes (Blue System walls) */}
+      <div className="absolute top-0 right-0 w-32 h-64 bg-blue-abyss hidden lg:block z-0" />
+      <div className="absolute bottom-10 right-0 w-64 h-2 bg-accent-cyan z-0" />
+      <div className="absolute top-0 left-0 w-8 h-full bg-blue-electric hidden md:block z-0" />
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* Carousel Container */}
-          <div className="relative h-[500px] flex items-center justify-center perspective-1000">
-            <AnimatePresence mode="wait">
-              {getVisibleProjects().map((project) => {
-                const isCenter = project.position === 1
-                const isLeft = project.position === 0
-                const isRight = project.position === 2
-
-                return (
-                  <motion.div
-                    key={`${project.id}-${currentIndex}`}
-                    className="absolute w-80 h-96 bg-card rounded-xl shadow-2xl overflow-hidden cursor-pointer"
-                    initial={{
-                      x: isLeft ? -400 : isRight ? 400 : 0,
-                      z: isCenter ? 0 : -200,
-                      scale: isCenter ? 1 : 0.8,
-                      rotateY: isLeft ? 45 : isRight ? -45 : 0,
-                      opacity: 0
-                    }}
-                    animate={{
-                      x: isLeft ? -300 : isRight ? 300 : 0,
-                      z: isCenter ? 0 : -200,
-                      scale: isCenter ? 1 : 0.8,
-                      rotateY: isLeft ? 45 : isRight ? -45 : 0,
-                      opacity: isCenter ? 1 : 0.6
-                    }}
-                    exit={{
-                      x: isLeft ? -400 : isRight ? 400 : 0,
-                      opacity: 0
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      ease: 'easeInOut'
-                    }}
-                    whileHover={isCenter ? {
-                      scale: 1.05,
-                      rotateY: 0,
-                      z: 50
-                    } : {}}
-                    onClick={isCenter ? () => window.open(project.link, '_blank') : undefined}
-                  >
-                    <div className="h-48 bg-cover bg-center relative"
-                         style={{ backgroundImage: `url(${project.image})` }}>
-                      <div className="absolute inset-0 bg-black/20" />
-                      {isCenter && (
-                        <motion.div
-                          className="absolute top-4 right-4 flex gap-2"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.3 }}
-                        >
-                          <button className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/30 transition-colors">
-                            <ExternalLink className="w-4 h-4 text-white" />
-                          </button>
-                          <button className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/30 transition-colors">
-                            <Github className="w-4 h-4 text-white" />
-                          </button>
-                        </motion.div>
-                      )}
-                    </div>
-                    
-                    <div className="p-6">
-                      <h3 className="text-xl mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 3).map((tech) => (
-                          <span
-                            key={tech}
-                            className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex justify-center items-center gap-8 mt-12">
-            <motion.button
-              onClick={prevProject}
-              className="bg-white shadow-lg p-3 rounded-full hover:shadow-xl transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </motion.button>
-
-            <div className="flex gap-3">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex ? 'bg-primary' : 'bg-muted'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <motion.button
-              onClick={nextProject}
-              className="bg-white shadow-lg p-3 rounded-full hover:shadow-xl transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <ChevronRight className="w-6 h-6" />
-            </motion.button>
-          </div>
-        </div>
+      {/* Massive Background Watermark */}
+      <div className="absolute left-16 top-1/2 -translate-y-1/2 -rotate-90 origin-left text-[150px] font-black text-white/5 tracking-tighter uppercase whitespace-nowrap pointer-events-none z-0">
+        Work
       </div>
+
+      {/* Navigation Controls */}
+      <div className="absolute bottom-12 right-12 md:right-24 z-50 flex gap-4">
+        <button 
+          onClick={prevProject} 
+          className="p-5 bg-blue-midnight border border-blue-abyss text-white hover:bg-blue-electric hover:border-blue-electric transition-all rounded-none group"
+          aria-label="Previous Project"
+        >
+          <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+        </button>
+        <button 
+          onClick={nextProject} 
+          className="p-5 bg-blue-midnight border border-blue-abyss text-white hover:bg-blue-electric hover:border-blue-electric transition-all rounded-none group"
+          aria-label="Next Project"
+        >
+          <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, x: 100, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, x: -100, filter: 'blur(10px)' }}
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          className="absolute inset-0 flex items-center justify-center z-10 w-full"
+        >
+          <div className="container mx-auto px-12 md:px-24">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
+              
+              {/* Project Content */}
+              <div className="space-y-6 max-w-2xl">
+                <div className="space-y-3">
+                  <div className="text-accent-cyan text-xs md:text-sm uppercase tracking-[0.2em] font-bold">
+                    Featured Project — 0{currentIndex + 1}
+                  </div>
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tighter leading-tight uppercase">
+                    {currentProject.title}
+                  </h3>
+                  <div className="w-20 h-[4px] bg-gradient-to-r from-blue-electric to-accent-cyan" />
+                </div>
+                
+                <div className="space-y-3">
+                  <p className="text-lg md:text-xl text-blue-ice font-semibold">
+                    {currentProject.shortDescription}
+                  </p>
+                  <p className="text-base text-neutral-slate leading-relaxed">
+                    {currentProject.longDescription}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-3 pt-2">
+                  {currentProject.tech.map(tech => (
+                    <span 
+                      key={tech} 
+                      className="bg-blue-midnight text-accent-cyan border border-blue-abyss px-4 py-2 text-xs uppercase font-bold tracking-widest rounded-none"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-4 pt-6">
+                  {currentProject.link && (
+                    <a 
+                      href={currentProject.link} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="bg-blue-electric text-white px-8 py-4 rounded-none uppercase text-xs font-bold tracking-widest hover:bg-white hover:text-blue-electric transition-colors flex items-center gap-2"
+                    >
+                      <ExternalLink className="w-4 h-4" /> View Live
+                    </a>
+                  )}
+                  {currentProject.github && (
+                    <a 
+                      href={currentProject.github} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="bg-transparent border border-neutral-slate text-neutral-slate px-8 py-4 rounded-none uppercase text-xs font-bold tracking-widest hover:border-white hover:text-white transition-colors flex items-center gap-2"
+                    >
+                      <Github className="w-4 h-4" /> Source Code
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Project Image */}
+              <div className="relative group w-full perspective-1000 hidden lg:block">
+                <motion.div
+                  initial={{ rotateY: 15, scale: 0.95 }}
+                  animate={{ rotateY: 0, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  className="relative w-full aspect-[4/3] bg-blue-midnight border-2 border-blue-abyss shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden rounded-none"
+                >
+                  <div className="absolute inset-0 bg-blue-electric/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700 z-10" />
+                  <img 
+                    src={currentProject.image} 
+                    alt={currentProject.title} 
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
+                  />
+                </motion.div>
+                
+                {/* Decorative sharp geometric offset border */}
+                <div className="absolute -bottom-8 -left-8 w-full h-full border-2 border-blue-abyss -z-10 transition-transform group-hover:translate-x-3 group-hover:translate-y-3 duration-700 rounded-none" />
+              </div>
+
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   )
 }
