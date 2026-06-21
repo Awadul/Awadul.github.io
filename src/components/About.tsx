@@ -100,15 +100,15 @@ export function About() {
                 <div className="space-y-8">
                   <div className="flex items-center justify-between border-b border-neutral-mist pb-4">
                     <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Experience</span>
-                    <span className="text-3xl font-extrabold text-blue-abyss">1+ Years</span>
+                    <span className="text-3xl font-extrabold text-blue-abyss">2+ Years</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-neutral-mist pb-4">
                     <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Projects</span>
-                    <span className="text-3xl font-extrabold text-blue-abyss">4+</span>
+                    <span className="text-3xl font-extrabold text-blue-abyss">10+</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Happy Clients</span>
-                    <span className="text-3xl font-extrabold text-blue-abyss">3+</span>
+                    <span className="text-3xl font-extrabold text-blue-abyss">7+</span>
                   </div>
                 </div>
               </motion.div>

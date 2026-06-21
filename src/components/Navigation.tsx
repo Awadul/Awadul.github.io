@@ -1,14 +1,12 @@
 import { motion } from 'motion/react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X, ArrowRight, Home, User, Briefcase, Mail } from 'lucide-react'
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const [isDockHovered, setIsDockHovered] = useState(false)
-  const lastScrollY = useRef(0)
 
   const navItems = [
     { label: 'Home', id: 'hero', icon: Home },
@@ -22,20 +20,8 @@ export function Navigation() {
       const currentScrollY = window.scrollY
       setIsScrolled(currentScrollY > 50)
 
-      // Header visibility based on scroll direction
-      if (currentScrollY > 50) {
-        if (currentScrollY > lastScrollY.current) {
-          setIsHeaderVisible(false) // Scrolling down
-        } else {
-          setIsHeaderVisible(true) // Scrolling up
-        }
-      } else {
-        setIsHeaderVisible(true) // At the top
-      }
-      lastScrollY.current = currentScrollY
-
       // Active section tracking
-      const scrollPosition = window.scrollY + window.innerHeight / 2
+      const scrollPosition = currentScrollY + window.innerHeight / 2
       const sections = navItems.map(item => document.getElementById(item.id))
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -63,8 +49,8 @@ export function Navigation() {
       <motion.header
         initial={false}
         animate={{ 
-          y: isHeaderVisible ? 0 : -100, 
-          opacity: isHeaderVisible ? 1 : 0 
+          y: isScrolled ? -100 : 0, 
+          opacity: isScrolled ? 0 : 1 
         }}
         transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
         className="fixed top-0 left-0 right-0 z-40 w-full bg-blue-midnight text-blue-ice transition-all duration-300 shadow-sm"
@@ -136,8 +122,8 @@ export function Navigation() {
           onMouseLeave={() => setIsDockHovered(false)}
           initial={false}
           animate={{
-            x: !isHeaderVisible ? (isDockHovered ? 0 : 'calc(100% - 16px)') : '100%',
-            opacity: !isHeaderVisible ? 1 : 0
+            x: isScrolled ? (isDockHovered ? 0 : 'calc(100% - 16px)') : '100%',
+            opacity: isScrolled ? 1 : 0
           }}
           transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
           className="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-blue-abyss/90 backdrop-blur-md border-l-2 border-t-2 border-b-2 border-blue-electric p-4 pr-6 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] rounded-none flex flex-col gap-6"

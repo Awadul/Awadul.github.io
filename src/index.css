@@ -5631,3 +5631,29 @@ html {
     opacity: 0;
   }
 }
+
+/* Custom Scrollbar - Blue System Design */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A192F; /* blue-abyss */
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(55, 138, 221, 0.3); /* subtle blue-electric */
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 138, 221, 0.7); /* brighter on hover */
+}
+
+/* Firefox Compatibility */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(55, 138, 221, 0.3) #0A192F;
+}

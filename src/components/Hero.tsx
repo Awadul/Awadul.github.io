@@ -120,7 +120,7 @@ export function Hero() {
                 REST APIs that don&apos;t break. Real-time systems that scale. Readable code. No shortcuts.
               </p>
               <p className="text-base text-neutral-slate leading-relaxed font-light text-center lg:text-left">
-                Currently pursuing a BS in Computer Science at NUST. I specialize in integrating robust full-stack solutions and architecting automated workflows to reduce operational overhead for forward-thinking enterprises.
+                Computer Science from NUST. I specialize in integrating robust full-stack solutions and architecting automated workflows to reduce operational overhead for forward-thinking enterprises.
               </p>
             </motion.div>
 

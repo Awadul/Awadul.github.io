@@ -1,5 +1,8 @@
 import { motion, AnimatePresence } from 'motion/react'
 import { useState } from 'react'
+import cargoExpressImage from '../assets/Projects/cargo-express-freight.png'
+import pixalCraftImage from '../assets/Projects/Pixal-craft.jpg'
+import radwiImage from '../assets/Projects/radwi-website.jpg'
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react'
 
 // Data extracted exactly from PersonalInfo.json
@@ -20,9 +23,10 @@ const projects = [
     shortDescription: 'Custom CRM for a freight and logistics company managing shipments and client operations.',
     longDescription: 'A complete logistics management system built for production. Handles complex shipment workflows, customer accounting, and operational synchronization.',
     tech: ['React', 'Node.js', 'Express', 'PostgreSQL'],
-    link: 'https://shipidx.com',
+    link: 'https://cargoexpressfreight.com/',
+    linkText: 'Client Website',
     github: null,
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c15944?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb2dpc3RpY3MlMjBzaGlwcGluZ3xlbnwxfHx8fDE3NTgxMTE0MjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    image: cargoExpressImage
   },
   {
     id: 'nust-bot',
@@ -42,7 +46,17 @@ const projects = [
     tech: ['JavaScript', 'React'],
     link: 'https://pixal-craft.vercel.app',
     github: 'https://github.com/Awadul/PixalCraft',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1aSUyMGRlc2lnbnxlbnwxfHx8fDE3NTgxMTE0MjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    image: pixalCraftImage
+  },
+  {
+    id: 'radwi-platform',
+    title: 'RADWI Corporate Platform',
+    shortDescription: 'Production-grade corporate platform for an IoT hardware and engineering company.',
+    longDescription: 'End-to-end architecture and redesign of an enterprise Next.js platform. Developed custom design systems, scroll-triggered animations, and optimized product rendering pipelines.',
+    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    link: 'https://rad-wi.com',
+    github: null,
+    image: radwiImage
   }
 ]
 
@@ -142,7 +156,7 @@ export function ProjectCarousel() {
                       rel="noreferrer" 
                       className="bg-blue-electric text-white px-8 py-4 rounded-none uppercase text-xs font-bold tracking-widest hover:bg-white hover:text-blue-electric transition-colors flex items-center gap-2"
                     >
-                      <ExternalLink className="w-4 h-4" /> View Live
+                      <ExternalLink className="w-4 h-4" /> {(currentProject as any).linkText || 'View Live'}
                     </a>
                   )}
                   {currentProject.github && (
