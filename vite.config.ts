@@ -5,6 +5,7 @@
   import path from 'path';
 
   export default defineConfig({
+    base: '/Portfolio-Website/',
     plugins: [react(), tailwindcss()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -53,7 +54,7 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'dist',
+      outDir: 'docs',
     },
     server: {
       port: 3000,
