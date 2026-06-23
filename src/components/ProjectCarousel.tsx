@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react'
 import { useState } from 'react'
 import cargoExpressImage from '../assets/Projects/cargo-express-freight.png'
-import pixalCraftImage from '../assets/Projects/Pixal-craft.jpg'
 import radwiImage from '../assets/Projects/radwi-website.jpg'
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react'
 
@@ -12,7 +11,7 @@ const projects = [
     title: 'AI CV Platform',
     shortDescription: 'Automated resume parsing and applicant scoring pipeline for client recruitment at scale.',
     longDescription: 'Fully automated production system that extracts candidate data from PDFs and ranks applicants against job criteria.',
-    tech: ['Next.js', 'OpenAI API', 'PostgreSQL', 'Supabase'],
+    tech: ['React.js', 'OpenAI API', 'PostgreSQL', 'Supabase'],
     link: 'https://cv.commit-offshore.com',
     github: null,
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMGRhdGF8ZW58MXx8fHwxNzU4MDc4OTczfDA&ixlib=rb-4.1.0&q=80&w=1080'
@@ -35,25 +34,15 @@ const projects = [
     longDescription: 'Built a custom retrieval pipeline using TF-IDF for keyword precision, MinHash LSH and SimHash for fuzzy semantic matching — no off-the-shelf vector DB. Academic Big Data semester project.',
     tech: ['Python', 'TF-IDF', 'MinHash LSH', 'SimHash'],
     link: null,
-    github: 'https://github.com/Awadul/NUST-Policy-Document-RAG-System',
+    github: 'https://github.com/Awadul/NUST-Policy-Document-RAG-System.',
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBSSUyMGNoYXRib3R8ZW58MXx8fHwxNzU4MTA2MzY0fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'pixal-craft',
-    title: 'Pixal Craft',
-    shortDescription: 'Creative web application with a polished UI.',
-    longDescription: 'A highly interactive and visually polished frontend creative application, demonstrating expertise in DOM manipulation and React-based interface design.',
-    tech: ['JavaScript', 'React'],
-    link: 'https://pixal-craft.vercel.app',
-    github: 'https://github.com/Awadul/PixalCraft',
-    image: pixalCraftImage
   },
   {
     id: 'radwi-platform',
     title: 'RADWI Corporate Platform',
     shortDescription: 'Production-grade corporate platform for an IoT hardware and engineering company.',
     longDescription: 'End-to-end architecture and redesign of an enterprise Next.js platform. Developed custom design systems, scroll-triggered animations, and optimized product rendering pipelines.',
-    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    tech: ['React.js', 'Tailwind CSS', 'Framer Motion'],
     link: 'https://rad-wi.com',
     github: null,
     image: radwiImage
