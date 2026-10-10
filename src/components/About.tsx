@@ -6,8 +6,8 @@ export function About() {
 
   const wipeVariants: Variants = {
     hidden: { scaleX: 0, scaleY: 0, x: "0%" },
-    visible: { 
-      scaleX: [0, 1, 1], 
+    visible: {
+      scaleX: [0, 1, 1],
       scaleY: [0, 1, 1],
       x: ["0%", "0%", "100%"],
       transition: { duration: 1.6, ease: [0.76, 0, 0.24, 1], times: [0, 0.5, 1] }
@@ -35,8 +35,8 @@ export function About() {
   }
 
   return (
-    <motion.section 
-      id="about" 
+    <motion.section
+      id="about"
       className="py-32 bg-neutral-offwhite relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
@@ -69,20 +69,16 @@ export function About() {
             {/* Left Content */}
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="text-lg text-neutral-ink leading-relaxed font-medium">
-                I'm a passionate developer with a keen eye for design and a love for creating 
-                seamless digital experiences. With expertise in modern web technologies, 
-                I bridge the gap between design and functionality.
+                I'm Muhammad Awais Abdullah, an AI engineer and full-stack developer based in Islamabad / Rawalpindi, Pakistan, and studying Computer Science at NUST. My work spans freight operations, recruitment automation, corporate websites, and document retrieval.
               </p>
-              
-              <p className="text-base text-neutral-slate leading-relaxed">
-                My approach combines clean, efficient code with thoughtful user experience design. 
-                I believe in the power of simplicity and the importance of attention to detail 
-                in crafting products that users love.
+
+              <p className="text-base text-neutral-ink leading-relaxed">
+                I focus on understanding the workflow first, then connecting the interface, APIs, and data behind it. I work with React, Next.js, Node.js, Python, and PostgreSQL to turn business requirements into usable software.
               </p>
 
               <motion.div className="flex flex-wrap gap-2 pt-6" variants={itemVariants}>
                 {['Backend Development', 'Frontend Development', 'Database Design', 'API Development'].map((skill, index) => (
-                  <span 
+                  <span
                     key={index}
                     className="bg-accent-frost text-blue-ocean border border-blue-sky rounded-none px-4 py-2 text-xs uppercase font-bold tracking-wider"
                   >
@@ -99,16 +95,16 @@ export function About() {
               >
                 <div className="space-y-8">
                   <div className="flex items-center justify-between border-b border-neutral-mist pb-4">
-                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Experience</span>
-                    <span className="text-3xl font-extrabold text-blue-abyss">2+ Years</span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Freelance since</span>
+                    <span className="text-3xl font-extrabold text-blue-abyss">2025</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-neutral-mist pb-4">
-                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Projects</span>
-                    <span className="text-3xl font-extrabold text-blue-abyss">10+</span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Education</span>
+                    <span className="text-3xl font-extrabold text-blue-abyss">NUST</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Happy Clients</span>
-                    <span className="text-3xl font-extrabold text-blue-abyss">7+</span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-slate">Based in</span>
+                    <span className="text-3xl font-extrabold text-blue-abyss">Pakistan</span>
                   </div>
                 </div>
               </motion.div>

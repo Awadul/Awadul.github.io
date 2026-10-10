@@ -1,26 +1,31 @@
-import { motion, AnimatePresence } from 'motion/react'
-import { useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useReducedMotion } from 'motion/react'
+import myNext9to5Image from '../assets/Projects/mynext9to5.png'
 import cargoExpressImage from '../assets/Projects/cargo-express-freight.png'
+import pixalImage from '../assets/Projects/Pixal-craft.jpg'
+import vanisherImage from '../assets/Projects/vanisher-showcase.png'
+import travectioImage from '../assets/Projects/travectio-showcase.png'
 import radwiImage from '../assets/Projects/radwi-website.jpg'
-import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import '../styles/projects.css'
 
-// Data extracted exactly from PersonalInfo.json
+// Client work from portfolio records; public repository links verified against GitHub.
 const projects = [
   {
     id: 'ai-cv',
-    title: 'AI CV Platform',
+    title: 'MyNext9to5',
     shortDescription: 'Automated resume parsing and applicant scoring pipeline for client recruitment at scale.',
-    longDescription: 'Fully automated production system that extracts candidate data from PDFs and ranks applicants against job criteria.',
-    tech: ['React.js', 'OpenAI API', 'PostgreSQL', 'Supabase'],
-    link: 'https://cv.commit-offshore.com',
+    longDescription: 'Recruiters need structured candidate information from unstructured resumes. This platform parses PDFs, extracts candidate data, and scores applicants against job criteria to support the review workflow.',
+    tech: ['Next.js', 'OpenAI API', 'PostgreSQL', 'Supabase'],
+    link: 'https://mynext9to5.com',
     github: null,
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMGRhdGF8ZW58MXx8fHwxNzU4MDc4OTczfDA&ixlib=rb-4.1.0&q=80&w=1080'
+    image: myNext9to5Image
   },
   {
     id: 'cargo-crm',
     title: 'Cargo Express Freight CRM',
     shortDescription: 'Custom CRM for a freight and logistics company managing shipments and client operations.',
-    longDescription: 'A complete logistics management system built for production. Handles complex shipment workflows, customer accounting, and operational synchronization.',
+    longDescription: 'Freight teams need a shared view of shipment and customer information. This custom CRM brings shipment management and client operations into a web application built around the logistics workflow.',
     tech: ['React', 'Node.js', 'Express', 'PostgreSQL'],
     link: 'https://cargoexpressfreight.com/',
     linkText: 'Client Website',
@@ -31,160 +36,127 @@ const projects = [
     id: 'nust-bot',
     title: 'NUST Student Guide Bot',
     shortDescription: "RAG-based chatbot over NUST's entire policy document corpus with a custom hybrid retrieval pipeline.",
-    longDescription: 'Built a custom retrieval pipeline using TF-IDF for keyword precision, MinHash LSH and SimHash for fuzzy semantic matching — no off-the-shelf vector DB. Academic Big Data semester project.',
+    longDescription: 'A collaborative academic Big Data project using TF-IDF, MinHash LSH, and SimHash in a custom policy-document retrieval pipeline.',
     tech: ['Python', 'TF-IDF', 'MinHash LSH', 'SimHash'],
     link: null,
-    github: 'https://github.com/Awadul/NUST-Policy-Document-RAG-System.',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBSSUyMGNoYXRib3R8ZW58MXx8fHwxNzU4MTA2MzY0fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    github: 'https://github.com/Awadul/NUST-Policy-Document-RAG-System',
+    image: null
   },
   {
     id: 'radwi-platform',
     title: 'RADWI Corporate Platform',
-    shortDescription: 'Production-grade corporate platform for an IoT hardware and engineering company.',
-    longDescription: 'End-to-end architecture and redesign of an enterprise Next.js platform. Developed custom design systems, scroll-triggered animations, and optimized product rendering pipelines.',
+    shortDescription: 'Corporate website redesign for an IoT hardware and engineering company.',
+    longDescription: 'Engineering offerings need a clear client-facing presentation. The redesign work combines a reusable design system, responsive layouts, and scroll-triggered motion to present the company and its products.',
     tech: ['React.js', 'Tailwind CSS', 'Framer Motion'],
     link: 'https://rad-wi.com',
-    github: null,
+    github: 'https://github.com/Awadul/RADWI---Protype-Website-View',
     image: radwiImage
+  },
+  {
+    id: 'pixal-craft', title: 'Pixal Craft',
+    shortDescription: 'A creative web application with a focus on interface design.',
+    longDescription: 'A public frontend project demonstrating React development and a polished visual interface. Explore the deployed application and source to see the implementation.',
+    tech: ['React', 'JavaScript'], link: 'https://pixal-craft.vercel.app',
+    github: 'https://github.com/Awadul/PixalCraft', image: pixalImage
+  },
+  {
+    id: 'travectio', title: 'Travectio Solutions',
+    shortDescription: 'A financial decision platform for transportation companies, bringing operating costs and projected profitability into focus.',
+    longDescription: 'Travectio presents vehicle-specific operating costs, cost-per-mile analysis, and projected margins to support transportation decisions before work begins.',
+    tech: ['Financial workflows', 'Transportation', 'Web platform'],
+    link: 'https://travectiosolutions.com/', github: null, image: travectioImage
+  },
+  {
+    id: 'vanisher', title: 'Vanisher Chrome Extension',
+    shortDescription: 'Schedule browser-data cleanup or clear selected data on demand, entirely on your device.',
+    longDescription: 'An open-source Manifest V3 extension using Chrome alarms, browsingData, and local storage for scheduled cleanup and persistent preferences.',
+    tech: ['JavaScript', 'Manifest V3', 'Chrome APIs'],
+    link: 'https://chromewebstore.google.com/detail/vanisher-auto-delete-brow/bebdehdpolcbjpbbcgmcfalppgbfhind?authuser=0&hl=en',
+    linkText: 'Chrome Web Store',
+    github: 'https://github.com/Awadul/Vanisher-Extension', image: vanisherImage
+  },
+  {
+    id: 'data-scraping', title: 'Freelance Data Scraping',
+    shortDescription: 'A collection of data scraping projects developed for freelance work.',
+    longDescription: 'Businesses often need information gathered from scattered web sources. This repository collects freelance scraping work and offers source examples of data collection automation.',
+    tech: ['Data collection', 'Automation'], link: null,
+    github: 'https://github.com/Awadul/Data-Scraping', image: null
   }
+
 ]
 
+const projectFocus: Record<string, { category: string; skill: string; flow?: string[] }> = {
+  'ai-cv': { category: 'Client work / Recruitment', skill: 'Document processing & AI integration', flow: ['Resume PDFs', 'Structured candidate data', 'Job-criteria scoring'] },
+  'cargo-crm': { category: 'Client work / Logistics', skill: 'Full-stack workflows & relational data' },
+  'nust-bot': { category: 'Academic / AI retrieval', skill: 'Custom retrieval & document search', flow: ['Policy documents', 'Hybrid retrieval', 'Relevant context'] },
+  'radwi-platform': { category: 'Corporate website / Engineering', skill: 'Design systems & interface animation' },
+  'pixal-craft': { category: 'Creative / Frontend', skill: 'React interfaces & visual design' },
+  'travectio': { category: 'Business platform / Transportation', skill: 'Financial workflows & product presentation' },
+  'vanisher': { category: 'Chrome extension / Privacy', skill: 'Browser APIs & background service workers' },
+  'data-scraping': { category: 'Freelance / Automation', skill: 'Web data collection & workflow automation' },
+}
+
+// Stable image-first order keeps actual product previews at the front.
+const orderedProjects = [...projects].sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)))
+
 export function ProjectCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const reduceMotion = useReducedMotion()
+  const [drop, setDrop] = useState<{ y: number; radius: number } | null>(null)
 
-  const nextProject = () => {
-    setCurrentIndex((prev) => (prev + 1) % projects.length)
-  }
-
-  const prevProject = () => {
-    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
-  }
-
-  const currentProject = projects[currentIndex]
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section || reduceMotion || !('IntersectionObserver' in window)) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      const rect = section.getBoundingClientRect()
+      const y = Math.max(0, Math.min(rect.height, window.innerHeight / 2 - rect.top))
+      setDrop({ y, radius: Math.hypot(rect.width / 2, Math.max(y, rect.height - y)) + 24 })
+      observer.disconnect()
+    }, { rootMargin: '0px 0px -25% 0px', threshold: 0 })
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [reduceMotion])
 
   return (
-    <section id="projects" className="h-screen w-full relative bg-neutral-void overflow-hidden text-blue-ice flex items-center">
-      
-      {/* Geometric Architectural Shapes (Blue System walls) */}
-      <div className="absolute top-0 right-0 w-32 h-64 bg-blue-abyss hidden lg:block z-0" />
-      <div className="absolute bottom-10 right-0 w-64 h-2 bg-accent-cyan z-0" />
-      <div className="absolute top-0 left-0 w-8 h-full bg-blue-electric hidden md:block z-0" />
-
-      {/* Massive Background Watermark */}
-      <div className="absolute left-16 top-1/2 -translate-y-1/2 -rotate-90 origin-left text-[150px] font-black text-white/5 tracking-tighter uppercase whitespace-nowrap pointer-events-none z-0">
-        Work
-      </div>
-
-      {/* Navigation Controls */}
-      <div className="absolute bottom-12 right-12 md:right-24 z-50 flex gap-4">
-        <button 
-          onClick={prevProject} 
-          className="p-5 bg-blue-midnight border border-blue-abyss text-white hover:bg-blue-electric hover:border-blue-electric transition-all rounded-none group"
-          aria-label="Previous Project"
-        >
-          <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
-        </button>
-        <button 
-          onClick={nextProject} 
-          className="p-5 bg-blue-midnight border border-blue-abyss text-white hover:bg-blue-electric hover:border-blue-electric transition-all rounded-none group"
-          aria-label="Next Project"
-        >
-          <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-        </button>
-      </div>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, x: 100, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, x: -100, filter: 'blur(10px)' }}
-          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-          className="absolute inset-0 flex items-center justify-center z-10 w-full"
-        >
-          <div className="container mx-auto px-12 md:px-24">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
-              
-              {/* Project Content */}
-              <div className="space-y-6 max-w-2xl">
-                <div className="space-y-3">
-                  <div className="text-accent-cyan text-xs md:text-sm uppercase tracking-[0.2em] font-bold">
-                    Featured Project — 0{currentIndex + 1}
+    <section ref={sectionRef} id="projects" className="project-showcase" aria-labelledby="selected-work-heading">
+      {drop && !reduceMotion && <div className="project-drop-reveal" aria-hidden="true"
+        style={{ '--drop-y': `${drop.y}px`, '--drop-end': `${drop.radius}px` } as CSSProperties}
+        onAnimationEnd={() => setDrop(null)} />}
+      <div className="project-container">
+        <header className="project-heading">
+          <div><h2 id="selected-work-heading">Selected work</h2><p>A closer look at the work.</p></div>
+          <a href="https://github.com/Awadul" target="_blank" rel="noreferrer">More on GitHub <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </header>
+        <div className="project-gallery">
+          {orderedProjects.map(project => {
+            const focus = projectFocus[project.id]
+            const screenshot = project.image
+            return (
+              <article key={project.id} className="project-entry">
+                <a className="project-card-link" href={project.link || project.github || undefined} target="_blank" rel="noreferrer" aria-label={`Explore ${project.title}${project.link ? ' website' : ' source code'} (opens in a new tab)`}>
+                  <div className={`project-preview ${['vanisher', 'travectio'].includes(project.id) ? 'project-preview-artwork' : ''}`}>
+                    {screenshot ? <img src={screenshot} alt="" loading="lazy" /> : (
+                      <div className="project-system" aria-hidden="true">
+                        <p>{focus.skill}</p><strong>{project.title}</strong>
+                        {focus.flow ? <ol>{focus.flow.map(step => <li key={step}>{step}</li>)}</ol> : <span>{project.tech.join(' / ')}</span>}
+                      </div>
+                    )}
+                    <div className="project-overlay">
+                      <p className="project-overlay-description">{project.shortDescription}</p>
+                      <p className="project-overlay-skill">{focus.skill}</p>
+                      <ul aria-label="Technologies">{project.tech.map(tech => <li key={tech}>{tech}</li>)}</ul>
+                      <span className="project-overlay-action">{project.link ? ('linkText' in project ? (project.linkText === 'Chrome Web Store' ? 'View in Chrome Web Store' : 'Visit client website') : 'Explore project') : 'Explore source code'} <ArrowUpRight size={18} aria-hidden="true" /></span>
+                    </div>
                   </div>
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tighter leading-tight uppercase">
-                    {currentProject.title}
-                  </h3>
-                  <div className="w-20 h-[4px] bg-gradient-to-r from-blue-electric to-accent-cyan" />
-                </div>
-                
-                <div className="space-y-3">
-                  <p className="text-lg md:text-xl text-blue-ice font-semibold">
-                    {currentProject.shortDescription}
-                  </p>
-                  <p className="text-base text-neutral-slate leading-relaxed">
-                    {currentProject.longDescription}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-3 pt-2">
-                  {currentProject.tech.map(tech => (
-                    <span 
-                      key={tech} 
-                      className="bg-blue-midnight text-accent-cyan border border-blue-abyss px-4 py-2 text-xs uppercase font-bold tracking-widest rounded-none"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-4 pt-6">
-                  {currentProject.link && (
-                    <a 
-                      href={currentProject.link} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="bg-blue-electric text-white px-8 py-4 rounded-none uppercase text-xs font-bold tracking-widest hover:bg-white hover:text-blue-electric transition-colors flex items-center gap-2"
-                    >
-                      <ExternalLink className="w-4 h-4" /> {(currentProject as any).linkText || 'View Live'}
-                    </a>
-                  )}
-                  {currentProject.github && (
-                    <a 
-                      href={currentProject.github} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="bg-transparent border border-neutral-slate text-neutral-slate px-8 py-4 rounded-none uppercase text-xs font-bold tracking-widest hover:border-white hover:text-white transition-colors flex items-center gap-2"
-                    >
-                      <Github className="w-4 h-4" /> Source Code
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Project Image */}
-              <div className="relative group w-full perspective-1000 hidden lg:block">
-                <motion.div
-                  initial={{ rotateY: 15, scale: 0.95 }}
-                  animate={{ rotateY: 0, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                  className="relative w-full aspect-[4/3] bg-blue-midnight border-2 border-blue-abyss shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden rounded-none"
-                >
-                  <div className="absolute inset-0 bg-blue-electric/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700 z-10" />
-                  <img 
-                    src={currentProject.image} 
-                    alt={currentProject.title} 
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
-                  />
-                </motion.div>
-                
-                {/* Decorative sharp geometric offset border */}
-                <div className="absolute -bottom-8 -left-8 w-full h-full border-2 border-blue-abyss -z-10 transition-transform group-hover:translate-x-3 group-hover:translate-y-3 duration-700 rounded-none" />
-              </div>
-
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+                  <div className="project-caption"><div><h3>{project.title}</h3><p>{focus.category}</p></div><ArrowUpRight size={22} aria-hidden="true" /></div>
+                </a>
+              </article>
+            )
+          })}
+        </div>
+        <div className="project-closing"><p>Have a project in mind?</p><a className="work-btn" href="#contact">Let’s discuss your project <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+      </div>
     </section>
   )
 }

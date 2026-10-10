@@ -12,6 +12,7 @@ export function Navigation() {
     { label: 'Home', id: 'hero', icon: Home },
     { label: 'About', id: 'about', icon: User },
     { label: 'Projects', id: 'projects', icon: Briefcase },
+    { label: 'Services', id: 'services', icon: Briefcase },
     { label: 'Contact', id: 'contact', icon: Mail }
   ]
 
@@ -48,9 +49,9 @@ export function Navigation() {
       {/* Primary Top Header (Hidden on scroll) */}
       <motion.header
         initial={false}
-        animate={{ 
-          y: isScrolled ? -100 : 0, 
-          opacity: isScrolled ? 0 : 1 
+        animate={{
+          y: isScrolled ? -100 : 0,
+          opacity: isScrolled ? 0 : 1
         }}
         transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
         className="fixed top-0 left-0 right-0 z-40 w-full bg-blue-midnight text-blue-ice transition-all duration-300 shadow-sm"
@@ -85,7 +86,7 @@ export function Navigation() {
                   </button>
                 ))}
               </div>
-              
+
               {/* CTA Button */}
               <button
                 onClick={() => scrollToSection('contact')}
@@ -134,19 +135,20 @@ export function Navigation() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
+                aria-label={item.label}
                 className="relative group p-3 flex items-center justify-center"
               >
                 <item.icon className={`w-6 h-6 transition-all duration-500 ease-[0.76,0,0.24,1] ${isActive ? 'text-accent-cyan scale-110' : 'text-neutral-slate group-hover:text-white group-hover:scale-110'}`} />
-                
+
                 {/* Tooltip */}
                 <div className="absolute right-full mr-6 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-electric text-white text-xs uppercase tracking-widest font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-none whitespace-nowrap shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
                   {item.label}
                   <div className="absolute top-1/2 -translate-y-1/2 right-[-4px] w-2 h-2 bg-blue-electric rotate-45" />
                 </div>
-                
+
                 {/* Active Indicator Line */}
                 {isActive && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeNavIndicator"
                     className="absolute -right-4 top-0 bottom-0 w-[2px] bg-accent-cyan shadow-[0_0_10px_#06B6D4]"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -199,7 +201,7 @@ export function Navigation() {
                 </motion.button>
               )
             })}
-            
+
             <motion.button
               onClick={() => scrollToSection('contact')}
               className="mt-8 bg-blue-electric text-white px-6 py-4 uppercase tracking-wider text-sm font-bold flex items-center justify-center space-x-2 transition-all duration-300 hover:bg-white hover:text-blue-abyss"

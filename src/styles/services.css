@@ -1,0 +1,46 @@
+.services-section { position: relative; isolation: isolate; overflow: clip; background: #E6F1FB; color: #1A2535; padding: 56px 24px; }
+.services-container { max-width: 1160px; margin: 0 auto; }
+.services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; margin-bottom: 28px; }
+.services-header h2 { font-size: clamp(36px, 4.5vw, 56px); line-height: 1.1; letter-spacing: -.035em; color: #0C447C; font-weight: 800; }
+.services-header > p { font-size: 16px; line-height: 1.6; max-width: 500px; color: #185FA5; }
+.services-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.service-row { display: flex; flex-direction: column; min-width: 0; padding: 24px; background: #FFFFFF; color: #1A2535; border: 1px solid #B5D4F4; text-decoration: none; }
+.service-heading { display: flex; flex-direction: column; align-items: start; }
+.service-icon { color: #185FA5; margin-bottom: 14px; }
+.service-category { font-size: 13px; color: #185FA5; font-weight: 600; margin-bottom: 10px; }
+.service-heading h3 { font-size: 23px; line-height: 1.2; letter-spacing: -.025em; font-weight: 750; color: #0C447C; max-width: 420px; text-wrap: balance; }
+.service-action { display: inline-flex; align-items: center; gap: 10px; color: #185FA5; font-size: 13px; font-weight: 600; margin-top: auto; padding-top: 20px; min-height: 32px; }
+.service-description { font-size: 14px; line-height: 1.6; margin: 12px 0 16px; }
+.service-content ul { list-style: none; padding: 0; display: grid; gap: 8px; font-size: 13px; }
+.service-content li { display: flex; align-items: baseline; gap: 12px; }
+.service-content li::before { content: ''; width: 12px; height: 2px; background: #378ADD; flex-shrink: 0; transform: translateY(-4px); }
+.service-evidence { border-top: 1px solid #B5D4F4; padding-top: 12px; margin: 18px 0 0; color: #185FA5; font-size: 13px; line-height: 1.6; }
+.service-evidence span { display: block; font-size: 12px; margin-bottom: 4px; }
+.service-row:focus-visible, .services-process a:focus-visible { outline: 3px solid #378ADD; outline-offset: 5px; }
+.service-row:is(:hover, :focus-visible) { border-color: #185FA5; }
+.service-row:hover .service-action { text-decoration: underline; text-underline-offset: 4px; }
+.services-process { margin-top: 28px; }
+.services-process h3 { font-size: 19px; color: #0C447C; font-weight: 700; letter-spacing: -.02em; margin-bottom: 16px; }
+.services-process ol { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.services-process li { border-top: 1px solid #185FA5; padding-top: 16px; }
+.services-process strong { font-size: 16px; color: #0C447C; }
+.services-process li p { font-size: 14px; line-height: 1.7; margin-top: 8px; }
+.services-process .work-btn { display: inline-flex; gap: 10px; background: #185FA5; color: #FFFFFF; border: 0; border-radius: 0; box-shadow: none; height: auto; min-height: 48px; padding: 14px 20px; font-size: 14px; margin-top: 28px; }
+.services-process .work-btn:hover { background: #0C447C; }
+.services-section ::selection { background: #B5D4F4; color: #042C53; }
+@media (hover: hover) and (pointer: fine) {
+ .service-platform { cursor: url('../assets/cursors/platform.svg') 16 16, pointer; }
+ .service-automation { cursor: url('../assets/cursors/automation.svg') 16 16, pointer; }
+ .service-website { cursor: url('../assets/cursors/website.svg') 16 16, pointer; }
+}
+@media (max-width: 900px) { .services-header { grid-template-columns: 1fr; gap: 16px; } .services-list { gap: 14px; } .service-row { padding: 20px; } .service-heading h3 { font-size: 21px; } }
+@media (max-width: 700px) { .services-section { padding: 44px 20px; } .services-list { grid-template-columns: 1fr; } .service-row { padding: 22px; } .services-process ol { gap: 12px; } .services-process strong { font-size: 13px; } }
+
+/* A single rectangle splits along its diagonal and clears toward opposing corners. */
+.services-entry-cover { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.services-entry-triangle { position: absolute; inset: -1px; background: #185FA5; animation-duration: 1500ms; animation-timing-function: cubic-bezier(.65, 0, .2, 1); animation-fill-mode: both; }
+.services-entry-triangle-top { clip-path: polygon(0 0, 100% 0, 0 100%); animation-name: services-split-top; }
+.services-entry-triangle-bottom { clip-path: polygon(100% 0, 100% 100%, 0 100%); animation-name: services-split-bottom; }
+@keyframes services-split-top { 0%, 12% { transform: translate(0,0); } 100% { transform: translate(-100%,-100%); } }
+@keyframes services-split-bottom { 0%, 12% { transform: translate(0,0); } 100% { transform: translate(100%,100%); } }
+@media (prefers-reduced-motion: reduce) { .services-entry-cover { display: none; } .services-entry-triangle { animation: none; } }

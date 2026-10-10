@@ -22,8 +22,8 @@ export function Contact() {
   }
 
   return (
-    <motion.footer 
-      id="contact" 
+    <motion.footer
+      id="contact"
       className="relative bg-blue-abyss pt-32 pb-12 overflow-hidden border-t-[8px] border-blue-electric"
       initial="hidden"
       whileInView="visible"
@@ -32,41 +32,41 @@ export function Contact() {
     >
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-end">
-          
+
           {/* Left Side: Get In Touch */}
           <div className="space-y-8">
             <div className="overflow-hidden">
               <motion.div variants={pullUpVariants}>
                 <div className="text-accent-cyan text-xs uppercase tracking-[0.2em] font-bold mb-4">
-                  Initiate Connection
+                  Have a project in mind?
                 </div>
                 <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-                  Let's <br /> Connect
+                  Let's <br /> Build
                 </h2>
               </motion.div>
             </div>
-            
+
             <div className="overflow-hidden">
               <motion.div variants={pullUpVariants}>
                 <div className="w-24 h-[4px] bg-gradient-to-r from-blue-electric to-accent-cyan" />
               </motion.div>
             </div>
-            
+
             <div className="overflow-hidden max-w-md">
-              <motion.p variants={pullUpVariants} className="text-lg text-neutral-slate font-medium leading-relaxed">
-                Whether you have a complex system to build, want to collaborate on artificial intelligence, 
-                or just want to talk code, the pipeline is open.
+              <motion.p variants={pullUpVariants} className="text-lg text-blue-ice font-medium leading-relaxed">
+                Tell me what you want to build, who will use it, and where your current process gets stuck. Include your target timeline and budget range so we can discuss a useful scope.
               </motion.p>
             </div>
-            
+
+            <p className="text-blue-ice break-words">awaisabdullahm79@gmail.com<br /><span className="text-sm">Islamabad / Rawalpindi · Pakistan · UTC+5<br />Open to freelance projects and remote collaboration.</span></p>
             <div className="overflow-hidden pt-4">
               <motion.div variants={pullUpVariants}>
                 <a
-                  href="mailto:awaisabdullahm79@gmail.com"
+                  href="mailto:awaisabdullahm79@gmail.com?subject=Project%20enquiry&body=Hi%20Awais%2C%0A%0AProject%20overview%3A%0AUsers%20and%20goals%3A%0ATarget%20timeline%3A%0ABudget%20range%3A%0A"
                   className="inline-flex items-center gap-4 bg-blue-electric text-white px-8 py-5 rounded-none font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-blue-abyss transition-colors duration-300 group"
                 >
                   <Mail className="w-5 h-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-                  <span>Send Transmission</span>
+                  <span>Discuss a Project</span>
                 </a>
               </motion.div>
             </div>
@@ -76,10 +76,10 @@ export function Contact() {
           <div className="flex flex-col lg:items-end space-y-6">
             <div className="overflow-hidden w-full lg:w-auto">
               <motion.div variants={pullUpVariants}>
-                <a 
-                  href="https://github.com/Awadul" 
-                  target="_blank" 
-                  rel="noreferrer" 
+                <a
+                  href="https://github.com/Awadul"
+                  target="_blank"
+                  rel="noreferrer"
                   className="block bg-blue-midnight p-8 w-full lg:w-80 group hover:-translate-x-2 hover:-translate-y-2 transition-transform duration-500 rounded-none relative shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                 >
                   <div className="absolute inset-0 border border-blue-electric/20 pointer-events-none" />
@@ -99,10 +99,10 @@ export function Contact() {
 
             <div className="overflow-hidden w-full lg:w-auto">
               <motion.div variants={pullUpVariants}>
-                <a 
-                  href="https://www.linkedin.com/in/muhammad-awais-abdullah-0a588b330/" 
-                  target="_blank" 
-                  rel="noreferrer" 
+                <a
+                  href="https://www.linkedin.com/in/muhammad-awais-abdullah-0a588b330/"
+                  target="_blank"
+                  rel="noreferrer"
                   className="block bg-blue-midnight p-8 w-full lg:w-80 group hover:-translate-x-2 hover:-translate-y-2 transition-transform duration-500 rounded-none relative shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                 >
                   <div className="absolute inset-0 border border-blue-electric/20 pointer-events-none" />
@@ -120,7 +120,7 @@ export function Contact() {
               </motion.div>
             </div>
           </div>
-          
+
         </div>
 
         {/* Footer Bottom Line */}
@@ -133,7 +133,7 @@ export function Contact() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Background Architectural Watermark */}
       <div className="absolute right-0 bottom-0 text-[200px] md:text-[300px] font-black text-white/[0.02] leading-none pointer-events-none select-none z-0 tracking-tighter translate-x-12 translate-y-12">
         EOF

@@ -109,10 +109,10 @@
     "projects": [
         {
             "id": "ai-cv-platform",
-            "name": "AI CV Processing Platform",
+            "name": "MyNext9to5",
             "shortDescription": "Automated resume parsing and applicant scoring pipeline for client recruitment at scale.",
             "longDescription": "Production system handling unstructured PDF input, extracting structured candidate data, and ranking applicants against job criteria — fully automated, no human review required.",
-            "url": "https://cv.commit-offshore.com",
+            "url": "https://mynext9to5.com",
             "visibility": "private",
             "status": "production",
             "tech": [
