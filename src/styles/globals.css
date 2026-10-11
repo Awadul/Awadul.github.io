@@ -3,7 +3,7 @@
 @source "../../index.html";
 @plugin "daisyui" {
   themes: false;
-  include: button;
+  include: button, input, textarea, checkbox, select;
   prefix: work-;
   logs: false;
 }

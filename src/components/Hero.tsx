@@ -69,7 +69,7 @@ export function Hero() {
               {[
                 { icon: Github, name: 'GitHub', href: 'https://github.com/Awadul' },
                 { icon: Linkedin, name: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-awais-abdullah-0a588b330/' },
-                { icon: Mail, name: 'Email Awais', href: 'mailto:awaisabdullahm79@gmail.com' },
+                { icon: Mail, name: 'Email Awais', href: 'mailto:awaisabdullahm@gmail.com' },
               ].map(({ icon: Icon, name, href }) => (
                 <a key={name} href={href} aria-label={name} target="_blank" rel="noopener noreferrer" className="p-3 text-neutral-slate hover:text-accent-cyan"><Icon className="w-5 h-5" aria-hidden="true" /></a>
               ))}

@@ -48,7 +48,7 @@ export function Services() {
         </header>
         <div className="services-list">
           {services.map(service => (
-            <a key={service.id} href={`mailto:awaisabdullahm79@gmail.com?subject=${encodeURIComponent(`Project enquiry: ${service.category}`)}`} className={`service-row service-${service.id}`}>
+            <a key={service.id} href={`mailto:awaisabdullahm@gmail.com?subject=${encodeURIComponent(`Project enquiry: ${service.category}`)}`} className={`service-row service-${service.id}`}>
               <div className="service-heading">
                 <service.icon className="service-icon" size={24} aria-hidden="true" />
                 <h3>{service.title}</h3>

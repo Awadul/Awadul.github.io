@@ -58,11 +58,11 @@ export function Contact() {
               </motion.p>
             </div>
 
-            <p className="text-blue-ice break-words">awaisabdullahm79@gmail.com<br /><span className="text-sm">Islamabad / Rawalpindi � Pakistan � UTC+5<br />Open to freelance projects and remote collaboration.</span></p>
-            <div className="overflow-hidden pt-4">
+            <p className="text-blue-ice break-words">awaisabdullahm@gmail.com<br /><span className="text-sm">Islamabad / Rawalpindi · Pakistan · UTC+5<br />Open to freelance projects and remote collaboration.</span></p>
+            <div className="overflow-hidden pt-4">              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-6 text-blue-ice">                <a href="tel:+923437836578" className="underline underline-offset-4 hover:text-white">+92 3437836578</a>                <a href="https://wa.me/923437836578" target="_blank" rel="noreferrer" className="work-btn work-btn-sm">Chat on WhatsApp <ArrowUpRight size={16} aria-hidden="true" /></a>              </div>
               <motion.div variants={pullUpVariants}>
                 <a
-                  href="mailto:awaisabdullahm79@gmail.com?subject=Project%20enquiry&body=Hi%20Awais%2C%0A%0AProject%20overview%3A%0AUsers%20and%20goals%3A%0ATarget%20timeline%3A%0ABudget%20range%3A%0A"
+                  href="mailto:awaisabdullahm@gmail.com?subject=Project%20enquiry&body=Hi%20Awais%2C%0A%0AProject%20overview%3A%0AUsers%20and%20goals%3A%0ATarget%20timeline%3A%0ABudget%20range%3A%0A"
                   className="inline-flex items-center gap-4 bg-blue-electric text-white px-8 py-5 rounded-none font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-blue-abyss transition-colors duration-300 group"
                 >
                   <Mail className="w-5 h-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
@@ -126,7 +126,7 @@ export function Contact() {
         {/* Footer Bottom Line */}
         <div className="mt-16 pt-8 border-t border-blue-electric/20 flex flex-col md:flex-row justify-between items-center gap-4 overflow-hidden">
           <motion.div variants={pullUpVariants} className="text-neutral-slate text-sm font-bold uppercase tracking-widest">
-            © {new Date().getFullYear()} Muhammad Awais Abdullah
+            Â© {new Date().getFullYear()} Muhammad Awais Abdullah
           </motion.div>
           <motion.div variants={pullUpVariants} className="text-neutral-slate text-xs uppercase tracking-widest flex items-center gap-2">
             Status: <span className="w-2 h-2 bg-accent-cyan block animate-pulse shadow-[0_0_10px_#06B6D4]"></span> Open to opportunities

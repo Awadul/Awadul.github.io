@@ -1,1 +1,10 @@
 node_modules
+.venv
+__pycache__/
+.pytest_cache/
+backend/.env
+backend/data/
+.env
+.env.local
+.env.*.local
+.env

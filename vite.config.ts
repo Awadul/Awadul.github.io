@@ -59,5 +59,11 @@
     server: {
       port: 3000,
       open: true,
+      watch: {
+        ignored: ['**/backend/**', '**/docs/**'],
+      },
+      fs: {
+        deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', '**/backend/**', '**/PersonalInfo.json'],
+      },
     },
   });
