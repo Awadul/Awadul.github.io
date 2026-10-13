@@ -52,9 +52,9 @@ export function Services() {
         <div className="services-process">
           <h3>A clear process, from scope to handover.</h3>
           <ol>
-            <li><strong>Define the scope</strong></li>
-            <li><strong>Build & review</strong></li>
-            <li><strong>Launch & hand over</strong></li>
+            <li><strong>Define the scope</strong><p>Clarify the users, workflows, and priorities before development.</p></li>
+            <li><strong>Build & review</strong><p>Review the working interface and refine the details together.</p></li>
+            <li><strong>Launch & hand over</strong><p>Prepare deployment, documentation, and the next steps for maintaining the software.</p></li>
           </ol>
           <a className="work-btn" href="#contact">Tell me what you need <ArrowUpRight size={18} aria-hidden="true" /></a>
         </div>

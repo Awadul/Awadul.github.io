@@ -196,6 +196,19 @@
         "minHeight": "44px"
       },
       "technologyLogoContrast": "White OpenAI, LangChain and LangGraph marks use ink backplates."
+    },
+    "editorial-spacing": {
+      "section": "clamp(48px, 6vw, 80px)",
+      "group": "32px",
+      "copyGap": "16px",
+      "readingMeasure": "65ch",
+      "aboutBody": "16px / 1.7, left aligned",
+      "projectPurpose": "15px / 1.7",
+      "projectPadding": {
+        "desktop": "24px",
+        "mobile": "20px"
+      },
+      "preservedIdentity": "Newsprint, selective spacing reference only"
     }
   },
   "components": [

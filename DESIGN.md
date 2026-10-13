@@ -175,3 +175,6 @@ Preserve genuine source links and official technology marks. Existing project sc
 - **Don't** add rounded cards, pill controls, ambient card shadows or competing accent palettes.
 - **Don't** invent metrics, testimonials, client attribution or project results.
 - **Don't** replace real project screenshots with newly invented raster evidence.
+
+### Selective editorial spacing refinement
+The user supplied a Luxury/Editorial reference for useful spacing and information, not a palette replacement. Keep the Newsprint identity and compact project-led first viewport. Supporting sections use `--space-section: clamp(48px, 6vw, 80px)` with existing 40px mobile overrides where appropriate. Shared grouping/copy tokens are 32px/16px and reading measure is 65ch. About paragraphs are left-aligned at 16px with 1.7 line-height. Project purpose, service descriptions, and evidence copy use 15px reading text. Project padding is 24px desktop and 20px mobile. Process steps explain scope, review, and handover; contact explains voluntary chat-to-brief submission. No gold palette, fixed decorative grids, or cinematic motion was introduced.
