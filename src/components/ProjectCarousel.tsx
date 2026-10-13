@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { useReducedMotion } from 'motion/react'
 import myNext9to5Image from '../assets/Projects/mynext9to5.png'
 import cargoExpressImage from '../assets/Projects/cargo-express-freight.png'
 import pixalImage from '../assets/Projects/Pixal-craft.jpg'
@@ -32,16 +30,7 @@ const projects = [
     github: null,
     image: cargoExpressImage
   },
-  {
-    id: 'nust-bot',
-    title: 'NUST Student Guide Bot',
-    shortDescription: "RAG-based chatbot over NUST's entire policy document corpus with a custom hybrid retrieval pipeline.",
-    longDescription: 'A collaborative academic Big Data project using TF-IDF, MinHash LSH, and SimHash in a custom policy-document retrieval pipeline.',
-    tech: ['Python', 'TF-IDF', 'MinHash LSH', 'SimHash'],
-    link: null,
-    github: 'https://github.com/Awadul/NUST-Policy-Document-RAG-System',
-    image: null
-  },
+
   {
     id: 'radwi-platform',
     title: 'RADWI Corporate Platform',
@@ -75,65 +64,46 @@ const projects = [
     linkText: 'Chrome Web Store',
     github: 'https://github.com/Awadul/Vanisher-Extension', image: vanisherImage
   },
-  {
-    id: 'data-scraping', title: 'Freelance Data Scraping',
-    shortDescription: 'A collection of data scraping projects developed for freelance work.',
-    longDescription: 'Businesses often need information gathered from scattered web sources. This repository collects freelance scraping work and offers source examples of data collection automation.',
-    tech: ['Data collection', 'Automation'], link: null,
-    github: 'https://github.com/Awadul/Data-Scraping', image: null
-  }
+
 
 ]
 
 const projectFocus: Record<string, { category: string; skill: string; flow?: string[] }> = {
   'ai-cv': { category: 'Client work / Recruitment', skill: 'Document processing & AI integration', flow: ['Resume PDFs', 'Structured candidate data', 'Job-criteria scoring'] },
   'cargo-crm': { category: 'Client work / Logistics', skill: 'Full-stack workflows & relational data' },
-  'nust-bot': { category: 'Academic / AI retrieval', skill: 'Custom retrieval & document search', flow: ['Policy documents', 'Hybrid retrieval', 'Relevant context'] },
   'radwi-platform': { category: 'Corporate website / Engineering', skill: 'Design systems & interface animation' },
   'pixal-craft': { category: 'Creative / Frontend', skill: 'React interfaces & visual design' },
   'travectio': { category: 'Business platform / Transportation', skill: 'Financial workflows & product presentation' },
   'vanisher': { category: 'Chrome extension / Privacy', skill: 'Browser APIs & background service workers' },
-  'data-scraping': { category: 'Freelance / Automation', skill: 'Web data collection & workflow automation' },
+}
+
+// Contribution wording follows the existing portfolio record; no performance claims.
+const contributions: Record<string, string> = {
+  'ai-cv': 'Resume parsing & applicant scoring',
+  'cargo-crm': 'CRM & shipment workflows',
+  'radwi-platform': 'Responsive redesign & interface animation',
+  'pixal-craft': 'React interface design & development',
+  'travectio': 'Website presentation for financial workflows',
+  'vanisher': 'Chrome extension & scheduled cleanup',
 }
 
 // Stable image-first order keeps actual product previews at the front.
 const orderedProjects = [...projects].sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)))
 
 export function ProjectCarousel() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const reduceMotion = useReducedMotion()
-  const [drop, setDrop] = useState<{ y: number; radius: number } | null>(null)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section || reduceMotion || !('IntersectionObserver' in window)) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return
-      const rect = section.getBoundingClientRect()
-      const y = Math.max(0, Math.min(rect.height, window.innerHeight / 2 - rect.top))
-      setDrop({ y, radius: Math.hypot(rect.width / 2, Math.max(y, rect.height - y)) + 24 })
-      observer.disconnect()
-    }, { rootMargin: '0px 0px -25% 0px', threshold: 0 })
-    observer.observe(section)
-    return () => observer.disconnect()
-  }, [reduceMotion])
-
   return (
-    <section ref={sectionRef} id="projects" className="project-showcase" aria-labelledby="selected-work-heading">
-      {drop && !reduceMotion && <div className="project-drop-reveal" aria-hidden="true"
-        style={{ '--drop-y': `${drop.y}px`, '--drop-end': `${drop.radius}px` } as CSSProperties}
-        onAnimationEnd={() => setDrop(null)} />}
+    <section id="projects" className="project-showcase" aria-labelledby="selected-work-heading">
       <div className="project-container">
         <header className="project-heading">
           <div><h2 id="selected-work-heading">Selected work</h2><p>A closer look at the work.</p></div>
           <a href="https://github.com/Awadul" target="_blank" rel="noreferrer">More on GitHub <ArrowUpRight size={18} aria-hidden="true" /></a>
         </header>
         <div className="project-gallery">
-          {orderedProjects.map(project => {
+          {orderedProjects.map((project, index) => {
             const focus = projectFocus[project.id]
             const screenshot = project.image
             return (
-              <article key={project.id} className="project-entry">
+              <article key={project.id} className={`project-entry${index === 0 ? ' project-entry-featured' : ''}`}>
                 <a className="project-card-link" href={project.link || project.github || undefined} target="_blank" rel="noreferrer" aria-label={`Explore ${project.title}${project.link ? ' website' : ' source code'} (opens in a new tab)`}>
                   <div className={`project-preview ${['vanisher', 'travectio'].includes(project.id) ? 'project-preview-artwork' : ''}`}>
                     {screenshot ? <img src={screenshot} alt="" loading="lazy" /> : (
@@ -149,7 +119,7 @@ export function ProjectCarousel() {
                       <span className="project-overlay-action">{project.link ? ('linkText' in project ? (project.linkText === 'Chrome Web Store' ? 'View in Chrome Web Store' : 'Visit client website') : 'Explore project') : 'Explore source code'} <ArrowUpRight size={18} aria-hidden="true" /></span>
                     </div>
                   </div>
-                  <div className="project-caption"><div><h3>{project.title}</h3><p>{focus.category}</p></div><ArrowUpRight size={22} aria-hidden="true" /></div>
+                  <div className="project-caption"><div><span className="project-figure">Fig. {String(index + 1).padStart(2, '0')} / Selected work</span><h3>{project.title}</h3><p className="project-category">{focus.category}</p><p className="project-outcome">{project.shortDescription}</p><p className="project-contribution"><span>Contribution</span>{contributions[project.id]}</p></div><ArrowUpRight size={22} aria-hidden="true" /></div>
                 </a>
               </article>
             )

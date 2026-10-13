@@ -194,7 +194,7 @@ export function ChatWidget() {
           <footer className="chat-footer"><a href="mailto:awaisabdullahm@gmail.com"><Mail size={13} aria-hidden="true" />Email Awais</a><a href="https://wa.me/923437836578" target="_blank" rel="noreferrer"><MessageSquare size={13} aria-hidden="true" />WhatsApp</a></footer>
         </section>
       )}
-      <button ref={launcher} className="work-btn chat-launcher" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={open ? 'Close project chat' : 'Ask about my work'}><MessageSquare size={20} aria-hidden="true" /><span>Ask about my work</span></button>
+      <button ref={launcher} className="work-btn chat-launcher" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={open ? 'Close project chat' : 'Ask about my work'}><MessageSquare size={20} aria-hidden="true" /><span className="chat-launcher-label">Ask about my work</span><span className="chat-launcher-short" aria-hidden="true">{open ? 'Close' : 'Chat'}</span></button>
       {!chatConfigured && open && <span className="sr-only">Chat backend not configured.</span>}
     </div>
   )

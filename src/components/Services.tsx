@@ -1,5 +1,3 @@
-import { useRef, useState } from 'react'
-import { useInView, useReducedMotion } from 'motion/react'
 import { Database, Workflow, PanelsTopLeft, ArrowUpRight } from 'lucide-react'
 import '../styles/services.css'
 
@@ -28,19 +26,8 @@ const services = [
 ]
 
 export function Services() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const entered = useInView(sectionRef, { once: true, amount: 0.12 })
-  const reduceMotion = useReducedMotion()
-  const [revealComplete, setRevealComplete] = useState(false)
-
   return (
-    <section ref={sectionRef} id="services" className="services-section" aria-labelledby="services-title">
-      {entered && !reduceMotion && !revealComplete && (
-        <div className="services-entry-cover" aria-hidden="true" onAnimationEnd={() => setRevealComplete(true)}>
-          <div className="services-entry-triangle services-entry-triangle-top" />
-          <div className="services-entry-triangle services-entry-triangle-bottom" />
-        </div>
-      )}
+    <section id="services" className="services-section" aria-labelledby="services-title">
       <div className="services-container">
         <header className="services-header">
           <h2 id="services-title">How I can help</h2>

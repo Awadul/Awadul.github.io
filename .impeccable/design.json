@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T21:30:45.411Z",
+  "title": "Design System: Awais Abdullah — Newsprint",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "editorial-red": {
+        "role": "primary",
+        "displayName": "Editorial Red",
+        "tonalRamp": [
+          "oklch(15% 0.22 29)",
+          "oklch(27% 0.22 29)",
+          "oklch(38% 0.22 29)",
+          "oklch(50% 0.22 29)",
+          "oklch(61% 0.22 29)",
+          "oklch(73% 0.22 29)",
+          "oklch(84% 0.22 29)",
+          "oklch(95% 0.22 29)"
+        ]
+      },
+      "muted-paper": {
+        "role": "neutral",
+        "displayName": "Muted Paper",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "caption": {
+        "role": "neutral",
+        "displayName": "Caption",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "inverse-copy": {
+        "role": "neutral",
+        "displayName": "Inverse Copy",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "inverse-rule": {
+        "role": "neutral",
+        "displayName": "Inverse Rule",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles."
+      },
+      "body": {
+        "displayName": "Reading",
+        "purpose": "Editorial prose."
+      },
+      "label": {
+        "displayName": "Interface",
+        "purpose": "Controls and uppercase labels."
+      },
+      "caption": {
+        "displayName": "Data",
+        "purpose": "Figure captions, edition lines and metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "chat-cutout",
+        "value": "4px 4px 0 var(--ink)",
+        "purpose": "Hard offset edge on the floating chat panel; other major surfaces are flat."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-transition",
+        "value": "color .2s, background-color .2s",
+        "purpose": "Printed button inversion."
+      },
+      {
+        "name": "preview-transition",
+        "value": "transform .2s ease-out",
+        "purpose": "Project image hover scale to 1.05."
+      },
+      {
+        "name": "ticker",
+        "value": "36s linear infinite",
+        "purpose": "Continuous ticker; pauses on hover. Reduced-motion preferences suppress animation."
+      },
+      {
+        "name": "brief-transition",
+        "value": "160ms ease-out",
+        "purpose": "Brief button and small arrow response."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "masthead-compact",
+        "value": "1050px"
+      },
+      {
+        "name": "projects-two-columns-max",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "767px"
+      },
+      {
+        "name": "chat-mobile-max",
+        "value": "600px"
+      },
+      {
+        "name": "narrow-mobile-max",
+        "value": "400px"
+      }
+    ],
+    "portfolio-refinements": {
+      "featuredProject": {
+        "id": "ai-cv",
+        "minWidth": "1001px",
+        "columnSpan": 2,
+        "previewAspectRatio": "3.2"
+      },
+      "projectCaptions": [
+        "category",
+        "purpose",
+        "contribution"
+      ],
+      "aboutColumns": "3fr 6fr 3fr",
+      "mobileLauncher": {
+        "maxWidth": "600px",
+        "closedLabel": "Chat",
+        "openLabel": "Close",
+        "minHeight": "44px"
+      },
+      "technologyLogoContrast": "White OpenAI, LangChain and LangGraph marks use ink backplates."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Compact ink action with reversible printed contrast.",
+      "html": "<button class=\"ds-primary\">Explore the work</button>",
+      "css": ".ds-primary{font-family:var(--font-ui,Inter,sans-serif);border-radius:0;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 18px;border:1px solid var(--ink,#111111);font-size:11px;font-weight:600;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:color .2s,background-color .2s;background:var(--ink,#111111);color:var(--paper,#F9F9F7)}.ds-primary:hover{background:var(--paper,#F9F9F7);color:var(--ink,#111111)}.ds-primary:focus-visible{outline:2px solid var(--ink,#111111);outline-offset:4px;}.ds-primary:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary square outlined control.",
+      "html": "<button class=\"ds-ghost\">Back to chat</button>",
+      "css": ".ds-ghost{font-family:var(--font-ui,Inter,sans-serif);border-radius:0;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 18px;border:1px solid var(--ink,#111111);font-size:11px;font-weight:600;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:color .2s,background-color .2s;background:transparent;color:var(--ink,#111111)}.ds-ghost:hover{background:var(--muted-paper,#E5E5E0)}.ds-ghost:focus-visible{outline:2px solid var(--ink,#111111);outline-offset:4px;}"
+    },
+    {
+      "name": "Chat Composer",
+      "kind": "input",
+      "refersTo": "composer",
+      "description": "Monospace visitor message field.",
+      "html": "<textarea class=\"ds-composer\" aria-label=\"Message\" placeholder=\"Describe your project\"></textarea>",
+      "css": ".ds-composer{font:14px/1.5 var(--font-data,monospace);resize:none;padding:10px;border:1px solid var(--ink,#111111);border-radius:0;background:var(--paper,#F9F9F7);color:var(--ink,#111111)}.ds-composer:focus-visible{outline:2px solid var(--editorial-red,#CC0000);outline-offset:3px}"
+    },
+    {
+      "name": "Masthead Navigation",
+      "kind": "nav",
+      "description": "Uppercase links on a ruled paper strip.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Portfolio\"><a href=\"#projects\">Work</a><a href=\"#services\">Services</a><a href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;gap:22px;background:var(--paper,#F9F9F7);border-bottom:1px solid var(--ink,#111111)}.ds-nav a{font:600 10px var(--font-ui,Inter,sans-serif);letter-spacing:.1em;text-transform:uppercase;color:var(--ink,#111111);display:flex;align-items:center;min-height:44px;text-decoration:none}.ds-nav a:hover{color:var(--editorial-red,#CC0000);text-decoration:underline}.ds-nav a:focus-visible{outline:2px solid var(--ink,#111111);outline-offset:4px;}"
+    },
+    {
+      "name": "Project Technology Tag",
+      "kind": "chip",
+      "description": "Small square metadata tag from project information overlays.",
+      "html": "<span class=\"ds-tag\">React</span>",
+      "css": ".ds-tag{display:inline-block;font:9px var(--font-ui,Inter,sans-serif);padding:4px;border:1px solid #737373;border-radius:0;color:var(--paper,#F9F9F7);background:var(--ink,#111111)}"
+    },
+    {
+      "name": "Project Entry",
+      "kind": "card",
+      "refersTo": "project-entry",
+      "description": "Ruled source-backed project caption; image omitted from this portable preview.",
+      "html": "<article class=\"ds-project\"><span>Fig. 1</span><a href=\"https://mynext9to5.com\"><h3>MyNext9to5</h3><p>Recruitment &amp; AI</p></a></article>",
+      "css": ".ds-project{padding:18px;border:1px solid var(--ink,#111111);border-radius:0;background:var(--paper,#F9F9F7);color:var(--ink,#111111)}.ds-project>span{font:9px var(--font-data,monospace);text-transform:uppercase;color:var(--caption,#525252)}.ds-project h3{font:700 23px/1.2 var(--font-display,serif);margin:7px 0}.ds-project p{font:10px/1.5 var(--font-ui,sans-serif);color:var(--caption,#525252)}.ds-project a{color:inherit;text-decoration:none}.ds-project a:hover{text-decoration:underline}.ds-project a:focus-visible{outline:2px solid var(--ink,#111111);outline-offset:4px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Newsprint",
+    "overview": "A working software portfolio reads as an independent journal: confident serif headlines, readable body copy, compact interface labels and figure captions. Rules and columns organize real work with deliberate density.\n\nThe explicit October 14, 2026 Newsprint brief supersedes the older blue palette in root `Agent.md`. That historical file remains intact. This document records the implemented system in the global, editorial, projects, services, technology and chat stylesheets; page composition remains in `.impeccable/surface-home.md`.",
+    "keyCharacteristics": [
+      "Paper, ink and restrained editorial red.",
+      "Square geometry and visible column rules.",
+      "Project and portrait imagery treated in grayscale; official technology logos retain their original colors.",
+      "Real project evidence and concise client-facing language."
+    ],
+    "rules": [
+      {
+        "name": "The Red Punctuation Rule",
+        "body": "Keep red selective; large structural surfaces use paper or ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Four Voices Rule",
+        "body": "Use display serif for headlines, reading serif for prose, sans-serif for controls and monospace for data captions.",
+        "section": "typography"
+      },
+      {
+        "name": "The Square Edge Rule",
+        "body": "Preserve zero radius across controls, panels, fields and image frames.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the user-pinned paper, ink and editorial red palette.",
+      "**Do** use visible rules, square corners and the four established type families.",
+      "**Do** retain source-backed project links, existing asset provenance and readable keyboard focus.",
+      "**Do** keep the home featured project compact on mobile so selected work remains easy to discover."
+    ],
+    "donts": [
+      "**Don't** restore the superseded blue identity from `Agent.md`.",
+      "**Don't** add rounded cards, pill controls, ambient card shadows or competing accent palettes.",
+      "**Don't** invent metrics, testimonials, client attribution or project results.",
+      "**Don't** replace real project screenshots with newly invented raster evidence."
+    ]
+  }
+}

@@ -23,7 +23,7 @@ const groups = [
 
 export function TechStack() {
   return (
-    <section className="tech-section" aria-labelledby="tech-heading">
+    <section id="tech" className="tech-section" aria-labelledby="tech-heading">
       <div className="tech-container">
         <div className="tech-header">
           <h2 id="tech-heading">My tech stack.</h2>

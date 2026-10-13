@@ -1,5 +1,5 @@
 import { Navigation } from './components/Navigation'
-import { Hero } from './components/Hero'
+import { Hero, WorkTicker } from './components/Hero'
 import { About } from './components/About'
 import { ProjectCarousel } from './components/ProjectCarousel'
 import { TechStack } from './components/TechStack'
@@ -22,12 +22,13 @@ export default function App() {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      <main>
+      <main id="main-content">
         <div id="hero">
           <Hero />
         </div>
 
         <ProjectCarousel />
+        <WorkTicker />
 
         <About />
 
