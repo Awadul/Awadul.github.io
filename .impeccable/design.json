@@ -198,8 +198,8 @@
       "technologyLogoContrast": "White OpenAI, LangChain and LangGraph marks use ink backplates."
     },
     "editorial-spacing": {
-      "section": "clamp(48px, 6vw, 80px)",
-      "group": "32px",
+      "section": "clamp(40px, 5vw, 64px)",
+      "group": "24px",
       "copyGap": "16px",
       "readingMeasure": "65ch",
       "aboutBody": "16px / 1.7, left aligned",
@@ -209,6 +209,18 @@
         "mobile": "20px"
       },
       "preservedIdentity": "Newsprint, selective spacing reference only"
+    },
+    "calmer-scale": {
+      "heroMaximum": "64px",
+      "heroWeight": 700,
+      "mobileHero": "36–48px",
+      "sectionHeadings": "28–40px",
+      "supportingTitles": "22–24px",
+      "featuredProjectTitle": "28px",
+      "body": "15–16px preserved",
+      "sectionSpacing": "40–64px",
+      "groupSpacing": "24px",
+      "majorSectionRule": "2px"
     }
   },
   "components": [

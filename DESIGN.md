@@ -12,13 +12,13 @@ colors:
 typography:
   display:
     fontFamily: "'Playfair Display', 'Times New Roman', serif"
-    fontSize: "clamp(48px,5.7vw,82px)"
-    fontWeight: 900
+    fontSize: "clamp(42px,4.6vw,64px)"
+    fontWeight: 700
     lineHeight: 0.99
     letterSpacing: "-.04em"
   headline:
     fontFamily: "'Playfair Display', 'Times New Roman', serif"
-    fontSize: "clamp(34px,3.4vw,48px)"
+    fontSize: "clamp(28px,3vw,40px)"
     fontWeight: 700
     lineHeight: 1.1
     letterSpacing: "-.03em"
@@ -113,8 +113,8 @@ The user-pinned palette uses a quiet paper ground, strong ink and selective red 
 The headline/body serif pairing creates the journal character. Sans-serif controls provide practical clarity; monospace captions distinguish metadata from prose.
 
 ### Hierarchy
-- **Display:** heavy, tight hero headlines using the frontmatter display role; mobile uses `clamp(42px,10vw,64px)`.
-- **Headline:** section titles use the frontmatter headline role; contact has a larger `clamp(42px,5vw,68px)` treatment.
+- **Display:** heavy, tight hero headlines using the frontmatter display role; mobile uses `clamp(36px,9vw,48px)`.
+- **Headline:** section titles use the frontmatter headline role; contact has a larger `clamp(36px,4vw,48px)` treatment.
 - **Title:** project captions use bold serif (23px/1.2); service titles use bold serif (28px/1.2).
 - **Body:** reading copy uses Lora, generally 13–16px with generous leading; hero deck is limited to 56ch.
 - **Label:** uppercase UI labels with tracking, distinct from body prose.
@@ -124,7 +124,7 @@ The headline/body serif pairing creates the journal character. Sans-serif contro
 
 ## Layout
 
-Containers cap at 1280px with 32px desktop side margins and 16px mobile side margins. One-pixel visible rules define columns and entries; four-pixel rules mark major editorial divisions. Section spacing commonly uses the frontmatter section step, reducing to 40px on mobile.
+Containers cap at 1280px with 32px desktop side margins and 16px mobile side margins. One-pixel visible rules define columns and entries; two-pixel rules mark major editorial divisions. Section spacing commonly uses the frontmatter section step, reducing to 40px on mobile.
 
 The current home begins with a sticky masthead and a 7/5 introduction/featured-work split. Selected work follows immediately. Below 768px, the introduction stacks above a compact featured preview: its image/text columns use 1fr/1.2fr, the image uses a 1.5 aspect ratio, and the byline and supplementary feature paragraph are hidden to keep the selected-work grid close to the first viewport. This is a home-surface choice, not a mandatory template for every future screen.
 
@@ -177,4 +177,4 @@ Preserve genuine source links and official technology marks. Existing project sc
 - **Don't** replace real project screenshots with newly invented raster evidence.
 
 ### Selective editorial spacing refinement
-The user supplied a Luxury/Editorial reference for useful spacing and information, not a palette replacement. Keep the Newsprint identity and compact project-led first viewport. Supporting sections use `--space-section: clamp(48px, 6vw, 80px)` with existing 40px mobile overrides where appropriate. Shared grouping/copy tokens are 32px/16px and reading measure is 65ch. About paragraphs are left-aligned at 16px with 1.7 line-height. Project purpose, service descriptions, and evidence copy use 15px reading text. Project padding is 24px desktop and 20px mobile. Process steps explain scope, review, and handover; contact explains voluntary chat-to-brief submission. No gold palette, fixed decorative grids, or cinematic motion was introduced.
+The user supplied a Luxury/Editorial reference for useful spacing and information, not a palette replacement. Keep the Newsprint identity and compact project-led first viewport. Supporting sections use `--space-section: clamp(40px, 5vw, 64px)` with existing 40px mobile overrides where appropriate. Shared grouping/copy tokens are 24px/16px and reading measure is 65ch. About paragraphs are left-aligned at 16px with 1.7 line-height. Project purpose, service descriptions, and evidence copy use 15px reading text. Project padding is 24px desktop and 20px mobile. Process steps explain scope, review, and handover; contact explains voluntary chat-to-brief submission. No gold palette, fixed decorative grids, or cinematic motion was introduced.

@@ -2,7 +2,8 @@
 @source "../../index.html";
 @plugin "daisyui" { themes: false; include: button, input, textarea, checkbox, select; prefix: work-; logs: false; }
 :root {
- --space-section: clamp(48px, 6vw, 80px); --space-group: 32px; --space-copy: 16px; --measure-copy: 65ch;
+ --type-hero: clamp(42px, 4.6vw, 64px); --type-section: clamp(28px, 3vw, 40px);
+ --space-section: clamp(40px, 5vw, 64px); --space-group: 24px; --space-copy: 16px; --measure-copy: 65ch;
  --paper: #F9F9F7; --ink: #111111; --rule: #111111; --muted-paper: #E5E5E0; --caption: #525252; --editorial-red: #CC0000;
  --font-display: 'Playfair Display', 'Times New Roman', serif; --font-reading: 'Lora', Georgia, serif; --font-ui: 'Inter', 'Helvetica Neue', sans-serif; --font-data: 'JetBrains Mono', 'Courier New', monospace;
  --background: var(--paper); --foreground: var(--ink); --primary: var(--ink); --primary-foreground: var(--paper); --card: var(--paper); --card-foreground: var(--ink); --muted: var(--muted-paper); --muted-foreground: var(--caption); --input: var(--rule); --ring: var(--ink); --radius: 0;

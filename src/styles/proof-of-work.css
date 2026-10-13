@@ -3,6 +3,6 @@
 .proof-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
 .proof-card { padding: 0 28px; border-right: 1px solid var(--rule); }
 .proof-card:first-child { padding-left: 0; } .proof-card:last-child { padding-right: 0; border: 0; }
-.proof-card h3 { font: 700 26px/1.2 var(--font-display); }
+.proof-card h3 { font: 700 22px/1.2 var(--font-display); }
 .proof-card p { margin-block: 20px; font-size: 15px; color: var(--caption); }
 @media(max-width:767px) { .proof-section { padding: 40px 16px 0; } .proof-grid { grid-template-columns: 1fr; } .proof-card,.proof-card:first-child,.proof-card:last-child { padding: 20px 0; border: 0; border-bottom: 1px solid var(--rule); } }
