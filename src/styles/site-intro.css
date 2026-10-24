@@ -3,11 +3,10 @@
 .intro-question { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8vw; font:600 clamp(42px,7.3vw,120px)/1.04 var(--font-ui); letter-spacing:-.04em; visibility:hidden; }
 .intro-question > span { display:block; white-space:nowrap; }
 .intro-question > span:first-child { font-weight:400; }
-.intro-glyph { position:absolute; right:-.12em; top:-.24em; font:650 clamp(620px,100vw,1600px)/1 var(--font-ui); letter-spacing:-.04em; color:#232323; transform-origin:65% 65%; visibility:hidden; user-select:none; }
 .site-intro > .intro-skip { position:absolute; right:clamp(20px,4vw,64px); bottom:clamp(28px,5vh,60px); min-height:44px; padding:10px 16px; background:transparent; color:#f8f8f7; border-color:#666; box-shadow:none; font-size:12px; }
 .site-intro > .intro-skip:not(:disabled):hover { background:#f8f8f7; color:#101010; border-color:#f8f8f7; }
 .site-intro > .intro-skip:focus-visible { outline-color:#f8f8f7; }
 .intro-progress { position:absolute; inset:auto 0 0; height:2px; background:#333; }
 .intro-progress-fill { height:100%; background:#f8f8f7; transform:scaleX(0); transform-origin:left; }
-@media(max-width:640px) { .intro-question { padding:24px; font-size:clamp(28px,7.5vw,48px); letter-spacing:-.035em; line-height:1.12; } .intro-glyph { top:4%; right:-.25em; font-size:180vw; } }
+@media(max-width:640px) { .intro-question { padding:24px; font-size:clamp(28px,7.5vw,48px); letter-spacing:-.035em; line-height:1.12; } }
 @media(prefers-reduced-motion:reduce) { .site-intro { display:none; } }

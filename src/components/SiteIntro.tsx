@@ -10,7 +10,7 @@ const questions = [
  ['Ready to', 'go 10×?'],
 ]
 
-export function SiteIntro({ onComplete, onReveal }: { onComplete: () => void; onReveal: () => void }) {
+export function SiteIntro({ onComplete }: { onComplete: () => void }) {
  const root = useRef<HTMLElement>(null)
  const skip = useRef<HTMLButtonElement>(null)
  useLayoutEffect(() => {
@@ -23,22 +23,17 @@ export function SiteIntro({ onComplete, onReveal }: { onComplete: () => void; on
   skip.current?.focus({ preventScroll:true })
   const context = gsap.context(() => {
    const slides = gsap.utils.toArray<HTMLElement>('.intro-question')
-   const ornaments = gsap.utils.toArray<HTMLElement>('.intro-glyph')
    const timeline = gsap.timeline({ onComplete:complete })
    slides.forEach((slide, index) => {
-    const start = index * 2.3
+    const start = index * 1.5
+    // Keep the reading position fixed; only opacity changes between questions.
     timeline.fromTo(slide,
-     { autoAlpha:0, rotation:-18, yPercent:100, scale:1.5, transformOrigin:'15% 100%' },
-     { autoAlpha:1, rotation:0, yPercent:0, scale:1, duration:.65, ease:'expo.out' }, start)
-    timeline.fromTo(ornaments[index],
-     { rotation:-100, scale:.6, autoAlpha:0 },
-     { rotation:0, scale:1, autoAlpha:1, duration:.8, ease:'power3.out' },start)
-    timeline.to(slide, { rotation:13, yPercent:-95, scale:1.55, autoAlpha:0, duration:.45, ease:'power3.in' },start+1.85)
-    timeline.to(ornaments[index], { rotation:80, scale:1.35, autoAlpha:0, duration:.45, ease:'power3.in' },start+1.85)
+     { autoAlpha:0 },
+     { autoAlpha:1, duration:.25, ease:'sine.out' }, start)
+    timeline.to(slide, { autoAlpha:0, duration:.2, ease:'sine.in' },start+1.3)
    })
-   timeline.call(onReveal, [], 9.2)
-   timeline.to(root.current, { yPercent:-100, duration:.7, ease:'power3.inOut' },9.2)
-   timeline.fromTo('.intro-progress-fill',{scaleX:0},{scaleX:1,duration:9.2,ease:'none'},0)
+   timeline.to(root.current, { opacity:0, duration:.4, ease:'sine.inOut' },6)
+   timeline.fromTo('.intro-progress-fill',{scaleX:0},{scaleX:1,duration:6,ease:'none'},0)
    const syncVisibility = () => document.hidden ? timeline.pause() : timeline.resume()
    document.addEventListener('visibilitychange',syncVisibility)
    if (document.hidden) timeline.pause()
@@ -55,12 +50,11 @@ export function SiteIntro({ onComplete, onReveal }: { onComplete: () => void; on
    preference.removeEventListener('change',syncMotion)
    document.body.style.overflow = previousOverflow
   }
- }, [onComplete, onReveal])
+ }, [onComplete])
  return <section ref={root} className="site-intro" aria-label="Welcome to Awais’s portfolio">
   <p className="sr-only">Need a digital solution? Automate the boring stuff? Build your online presence? Ready to go ten times further? The portfolio opens after this introduction. You can skip it now.</p>
   <div className="intro-stage" aria-hidden="true">{questions.map(([first, second]) =>
    <div className="intro-beat" key={second}>
-    <span className="intro-glyph">?</span>
     <div className="intro-question"><span>{first}</span><span>{second}</span></div>
    </div>
   )}</div>

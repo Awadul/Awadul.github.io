@@ -12,7 +12,7 @@ export function Navigation() {
   return ()=>media.revert()
  },[open])
  return <header className="masthead">
-  <a className="availability" href="#contact"><span aria-hidden="true"/>Available for new projects</a>
+  <a className="availability availability-link" href="#contact">Available for new projects<ArrowUpRight size={14} aria-hidden="true"/></a>
   <nav className="desktop-nav" aria-label="Primary navigation">{items.map(([label,id])=><a key={id} href={`#${id}`}>{label}{id==='projects' && <small>[06]</small>}</a>)}</nav>
   <a className="work-btn navigation-cta" href="#contact">Let’s talk <ArrowUpRight size={15} aria-hidden="true"/></a>
   <button className="work-btn work-btn-ghost mobile-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="mobile-navigation" onClick={()=>setOpen(!open)}>{open?<X size={20}/>:<Menu size={20}/>}</button>

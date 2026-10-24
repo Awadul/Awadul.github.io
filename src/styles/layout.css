@@ -29,3 +29,8 @@
 @media(min-width:901px) and (max-width:1100px) { .hero-portrait { margin-left:-22.5%; } }
 
 @media(min-width:1101px) { .hero-introduction h2 { width:320px; } }
+
+/* The masthead availability message is a quiet contact link, not a floating badge. */
+.masthead > .availability-link { min-height:44px; padding:8px 0; gap:8px; border-radius:0; background:transparent; box-shadow:none; font-size:12px; line-height:1.4; text-underline-offset:4px; text-decoration-thickness:1px; }
+.masthead > .availability-link:hover,.masthead > .availability-link:focus-visible { text-decoration:underline; }
+.masthead > .availability-link:focus-visible { outline:2px solid var(--ink); outline-offset:4px; }

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
+import { shouldShowIntro, rememberIntro } from './lib/intro-session'
 import { SiteIntro } from './components/SiteIntro'
 import { Navigation } from './components/Navigation'
 import { Hero } from './components/Hero'
@@ -14,12 +15,11 @@ import { MembraneBackground } from './components/MembraneBackground'
 
 export default function App() {
  const [hash, setHash] = useState(window.location.hash)
- const [intro, setIntro] = useState(() => ['', '#', '#/'].includes(window.location.hash) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches)
- const [revealing, setRevealing] = useState(false)
+ const [intro, setIntro] = useState(shouldShowIntro)
  const page = useRef<HTMLDivElement>(null)
  const completedIntro = useRef(false)
  const finishIntro = useCallback(() => { completedIntro.current = true; setIntro(false) }, [])
- const revealPage = useCallback(() => setRevealing(true), [])
+ useEffect(() => { if (intro) rememberIntro() }, [intro])
  useEffect(() => {
   if (page.current) page.current.inert = intro
   if (!intro && completedIntro.current) {
@@ -37,7 +37,7 @@ export default function App() {
  }, [])
  if (hash === '#/inbox') return <OwnerInbox />
  return <>
- {intro && <SiteIntro onComplete={finishIntro} onReveal={revealPage}/>}
+ {intro && <SiteIntro onComplete={finishIntro}/>}
  <div ref={page} className="app-portfolio" aria-hidden={intro || undefined}>
   <div className="cloud-parallax" aria-hidden="true"/>
   <MembraneBackground page/>
@@ -50,7 +50,7 @@ export default function App() {
    <TechStack/>
    <Contact/>
   </main>
-  {(!intro || revealing) && <ScrollExperience/>}
+  {!intro && <ScrollExperience/>}
   <ChatWidget/>
  </div>
  </>
