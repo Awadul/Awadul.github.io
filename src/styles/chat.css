@@ -1,6 +1,6 @@
-/* Chat widget: flat black and white panel, 4px frame, red only for focus and hover. */
+/* Portfolio conversation, history, and project-brief controls. */
 .chat-widget { position: fixed; right: 24px; bottom: 24px; z-index: 60; color: var(--swiss-black); font-family: var(--font-ui); }
-/* The launcher is the one persistent red call to action. Black would vanish on the black Services and Contact sections. */
+
 .chat-widget .chat-launcher { min-height: 56px; padding: 14px 20px; gap: 12px; background: var(--swiss-red); color: var(--swiss-black); border-color: var(--swiss-black); }
 .chat-widget .chat-launcher:hover { background: var(--swiss-black); color: var(--swiss-white); border-color: var(--swiss-white); }
 .chat-launcher-short { display: none; }
@@ -67,3 +67,60 @@
   .chat-panel { bottom: 68px; width: calc(100vw - 32px); height: min(620px, calc(100dvh - 100px)); }
   .chat-composer textarea { font-size: 1rem; } .chat-header { padding: 14px 16px; }
 }
+
+/* Portfolio assistant: one neutral system for conversation and recovery. */
+.chat-widget { color:var(--ink); }
+.chat-widget .chat-launcher { min-height:48px; background:#242424; color:#fff; border:1px solid #ffffff60; border-radius:999px; box-shadow:0 4px 15px #00000017; font-size:12px; }
+.chat-widget .chat-launcher:hover { background:#444; color:#fff; }
+.chat-panel { width:420px; height:min(640px,calc(100dvh - 120px)); border:1px solid #dededc; border-radius:16px; overflow:hidden; box-shadow:0 16px 48px #00000026; background:#fff; }
+.chat-header { padding:22px 20px; background:#242424; }
+.chat-header h2 { font-size:22px; font-weight:500; line-height:1.2; letter-spacing:-.03em; }
+.chat-header p { margin-top:7px; color:#c8c8c8; font-size:12px; font-weight:400; text-transform:none; letter-spacing:0; }
+.chat-header-actions { gap:0; }
+.chat-icon { border-radius:50%; }
+.chat-icon:not(:disabled):hover { background:#ffffff18; color:inherit; }
+.chat-connection { display:flex; align-items:center; gap:8px; padding:11px 20px; background:#f8f8f7; border-bottom:1px solid #e8e8e6; color:#626262; font-size:12px; line-height:1.5; }
+.chat-connection > span { width:6px; height:6px; flex-shrink:0; border-radius:50%; background:#888; }
+.chat-connection.is-ready > span { background:#16b56b; }
+.chat-transcript { padding:24px 20px; scrollbar-color:#aaa #f8f8f7; }
+.chat-welcome h3 { font-size:28px; font-weight:500; line-height:1.15; letter-spacing:-.035em; }
+.chat-notice { color:#626262; }
+.chat-suggestions { display:grid; gap:8px; margin-top:24px; }
+.chat-suggestions button { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:48px; padding:12px 14px; border:1px solid #dededc; border-radius:8px; text-transform:none; letter-spacing:0; font-size:14px; font-weight:400; }
+.chat-suggestions button:not(:disabled):hover { background:#f2f2f0; }
+.chat-suggestions button:disabled { opacity:1; color:#757575; background:#f8f8f7; }
+.chat-message { border:0; border-radius:10px; padding:14px 16px; }
+.chat-message-user { background:#242424; color:#fff; margin-left:30px; }
+.chat-message-assistant { background:#f3f3f1; margin-right:18px; }
+.chat-message > span { font-size:11px; font-weight:500; text-transform:none; letter-spacing:0; opacity:.7; }
+.chat-error { border:1px solid #e2c4bf; border-radius:10px; padding:16px; background:#fffaf9; }
+.chat-error button { font-weight:500; text-decoration:none; border-bottom:1px solid currentColor; }
+.chat-offline { padding:0; margin:4px 0 0; border:0; border-radius:0; background:transparent; }
+.chat-offline h3 { font-size:28px; font-weight:500; line-height:1.2; letter-spacing:-.035em; margin-bottom:14px; }
+.chat-offline > p { color:#626262; }
+.chat-offline .chat-error-detail { font-size:12px; padding-top:18px; margin-top:22px; border-top:1px solid #e8e8e6; }
+.chat-offline button { margin-top:14px; }
+.chat-composer { padding:14px 16px; border-top:1px solid #e8e8e6; background:#fafaf9; }
+.chat-composer textarea { border:1px solid #d8d8d6; border-radius:10px; caret-color:#242424; font-size:16px; }
+.chat-composer textarea:focus { border-color:#777; outline:2px solid #ddd; outline-offset:1px; }
+.chat-footer { gap:10px; padding:14px 16px; border-top:1px solid #e8e8e6; background:#fff; }
+.chat-footer a { flex:1; justify-content:center; min-height:44px; border:1px solid #dededc; border-radius:999px; font-size:12px; font-weight:400; text-decoration:none; }
+.chat-footer a:hover { background:#f2f2f0; }
+.chat-toolbar { border-color:#e8e8e6; }
+.chat-widget :is(button,a,select,textarea,input):focus-visible { outline-color:#777; }
+.chat-brief-action { border-color:#e8e8e6; }
+.chat-widget .chat-brief-button { font-size:12px; }
+.chat-brief label { font-size:12px; font-weight:500; text-transform:none; letter-spacing:0; }
+.chat-brief h3 { font-size:26px; font-weight:500; line-height:1.2; }
+.chat-projects a { border-color:#dededc; border-radius:8px; }
+.chat-projects a:hover { background:#eee; }
+.chat-projects img { filter:none; border-radius:4px; }
+@media(max-width:600px) { .chat-panel { bottom:62px; height:min(660px,calc(100dvh - 100px)); }.chat-header { padding:18px 16px; }.chat-header h2 { font-size:21px; }.chat-header p { font-size:11px; }.chat-transcript { padding:22px 18px; }.chat-widget .chat-launcher { min-height:44px; } }
+
+
+.chat-panel.is-offline { height:auto; max-height:calc(100dvh - 100px); }
+.chat-header,.chat-connection,.chat-footer,.chat-composer,.chat-toolbar { flex-shrink:0; }
+.chat-message-assistant p a:hover,.chat-widget .chat-brief-button:not(:disabled):hover { background:#eee; }
+
+/* GSAP applies the spiral aperture to the actual dialog surface. */
+.chat-panel[aria-hidden=true] { pointer-events:none; }

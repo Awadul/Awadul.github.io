@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from 'react'
+import { gsap } from 'gsap'
+import { chatSpiralClip } from '../lib/chat-motion'
 import { MessageSquare, X, Plus, Send, Trash2, History, FileText, ArrowUpRight, Mail } from 'lucide-react'
 import { ChatError, chatApi, chatConfigured, readHistory, type Chat, type Message, type PendingTurn } from '../lib/chat-api'
 import '../styles/chat.css'
@@ -15,6 +17,9 @@ function readPending(): PendingTurn | null {
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false)
+  const [present, setPresent] = useState(false)
+  const entered = useRef(false)
+  const reveal = useRef({progress:0})
   const [showHistory, setShowHistory] = useState(false)
   const [briefOpen, setBriefOpen] = useState(false)
   const [preparedBrief, setPreparedBrief] = useState<{ chatId: string; content: string; last_message_id: number } | null>(null)
@@ -30,9 +35,55 @@ export function ChatWidget() {
   const [ready, setReady] = useState(false)
   const [error, setError] = useState('')
   const [expired, setExpired] = useState(false)
+  const panel = useRef<HTMLElement>(null)
   const input = useRef<HTMLTextAreaElement>(null)
   const launcher = useRef<HTMLButtonElement>(null)
   const bottom = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    if (open && !present) { setPresent(true); return }
+    if (!present || !panel.current) return
+    const node = panel.current
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    node.inert = !open
+    let width=node.offsetWidth, height=node.offsetHeight
+    const spiralSupported=CSS.supports('clip-path','path("M0 0 L1 0 L1 1Z")')
+    const draw=()=>{
+      const amount=reveal.current.progress
+      node.style.clipPath=spiralSupported?chatSpiralClip(amount,width,height)
+        :amount>=.999?'none':`circle(${Math.hypot(width,height)/2*amount}px at 50% 50%)`
+    }
+    // Connection and brief states can resize the surface while it is opening.
+    const observer=new ResizeObserver(()=>{width=node.offsetWidth;height=node.offsetHeight;if(reveal.current.progress<1)draw()})
+    observer.observe(node)
+    const finishClose=()=>{entered.current=false;setPresent(false)}
+    const timeline=gsap.timeline()
+    const settle=()=>{
+      timeline.kill()
+      reveal.current.progress=open?1:0
+      gsap.set(node,{clearProps:'transform,opacity,clipPath,willChange'})
+      if(open)entered.current=true
+      else finishClose()
+    }
+    if(preference.matches){settle();observer.disconnect();return}
+    if(open&&!entered.current){
+      reveal.current.progress=0
+      gsap.set(node,{clearProps:'transform,opacity'})
+      entered.current=true
+    }
+    draw()
+    gsap.set(node,{willChange:'clip-path'})
+    const duration=1.5*Math.abs((open?1:0)-reveal.current.progress)
+    // The mask cuts the real dialog surface; no decorative overlay is involved.
+    timeline.to(reveal.current,{progress:open?1:0,duration,ease:'none',onUpdate:draw},0)
+    timeline.eventCallback('onComplete',()=>{
+      if(open)gsap.set(node,{clearProps:'transform,opacity,clipPath,willChange'})
+      else finishClose()
+    })
+    const changed=()=>{if(preference.matches)settle()}
+    preference.addEventListener('change',changed)
+    return()=>{timeline.kill();observer.disconnect();preference.removeEventListener('change',changed)}
+  },[open,present])
 
   function report(cause: unknown) {
     setError(cause instanceof Error ? cause.message : 'Something went wrong. Please try again.')
@@ -70,7 +121,7 @@ export function ChatWidget() {
   }
 
   useEffect(() => { if (open && !initialized) void initialize() }, [open])
-  useEffect(() => { if (open && !loading) input.current?.focus() }, [open, loading])
+  useEffect(() => { if (open && !loading) { if (input.current && !input.current.disabled) input.current.focus(); else panel.current?.focus() } }, [open, loading, present])
   useEffect(() => { bottom.current?.scrollIntoView({ block: 'nearest' }) }, [messages, busy, open])
 
   useEffect(() => {
@@ -162,9 +213,10 @@ export function ChatWidget() {
 
   return (
     <div className="chat-widget">
-      {open && (
-        <section className="chat-panel" role="dialog" aria-label="Ask about Awais's work" onKeyDown={(event) => { if (event.key === 'Escape') close() }}>
-          <header className="chat-header"><div><h2>Let’s talk.</h2><p>Awais’s AI assistant</p></div><div className="chat-header-actions"><button className="chat-icon" onClick={() => setShowHistory((value) => !value)} aria-label="Show conversation history" aria-expanded={showHistory} aria-controls="chat-controls" title="Conversation history"><History size={18} /></button><button className="chat-icon" onClick={close} aria-label="Close chat"><X size={20} /></button></div></header>
+      {present && (
+        <section aria-hidden={!open} ref={panel} tabIndex={-1} className={`chat-panel ${error && !initialized ? 'is-offline' : ''}`} role="dialog" aria-label="Ask about Awais's work" onKeyDown={(event) => { if (event.key === 'Escape') close() }}>
+          <header className="chat-header"><div><h2>Awais’s assistant</h2><p>AI guide to projects & services</p></div><div className="chat-header-actions"><button className="chat-icon" onClick={() => setShowHistory((value) => !value)} aria-label="Show conversation history" aria-expanded={showHistory} aria-controls="chat-controls" title="Conversation history"><History size={18} /></button><button className="chat-icon" onClick={close} aria-label="Close chat"><X size={20} /></button></div></header>
+          <div className={`chat-connection ${ready && initialized ? 'is-ready' : ''}`} role="status"><span aria-hidden="true"/>{loading ? 'Connecting to your conversation…' : ready && initialized ? 'Ready to help' : 'Assistant unavailable — direct contact is open'}</div>
           {!briefOpen && showHistory && <div className="chat-toolbar" id="chat-controls">
             <label className="sr-only" htmlFor="chat-history">Conversation history</label>
             <select id="chat-history" value={chatId} disabled={busy || loading} onChange={(event) => void selectChat(event.target.value)}><option value="">New conversation</option>{chats.map((chat) => <option value={chat.id} key={chat.id}>{chat.title}</option>)}</select>
@@ -173,7 +225,7 @@ export function ChatWidget() {
           </div>}
           {briefOpen ? <ProjectBrief key={chatId} chatId={chatId} token={token} initialBrief={preparedBrief?.chatId === chatId && preparedBrief.last_message_id === messages.filter((message) => message.role === 'user').at(-1)?.id ? preparedBrief.content : undefined} onBack={() => setBriefOpen(false)} /> : <><div className="chat-transcript" aria-busy={busy || loading}>
             {loading ? <p className="chat-notice" role="status">Loading your conversation…</p> : <>
-              {messages.length === 0 && !activePending && <div className="chat-welcome"><h3>What would you like to build?</h3><p className="chat-notice">Share your idea, or explore my work.</p><div className="chat-suggestions">{suggestions.map((suggestion, index) => <button key={suggestion} disabled={!ready || busy || !initialized} onClick={() => void send(suggestion)}>{['Explore services', 'AI projects', 'Custom CRM'][index]}</button>)}</div></div>}
+              {messages.length === 0 && !activePending && !error && <div className="chat-welcome"><h3>Explore the work.<br/>Find your next step.</h3><p className="chat-notice">Ask about projects, services, or the software you have in mind.</p><div className="chat-suggestions">{suggestions.map((suggestion, index) => <button key={suggestion} disabled={!ready || busy || !initialized} onClick={() => void send(suggestion)}><span>{['Explore services', 'See AI projects', 'Discuss a custom CRM'][index]}</span><ArrowUpRight size={16} aria-hidden="true"/></button>)}</div></div>}
               <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
                 {messages.map((message) => <div className={`chat-message chat-message-${message.role}`} key={message.id}><span>{message.role === 'user' ? 'You' : 'AI assistant'}</span><p><ChatText content={message.content} /></p>{message.role === 'assistant' && <ChatProjects content={message.content} />}</div>)}
                 {pendingVisible && <div className="chat-message chat-message-user"><span>You</span><p>{activePending.content}</p></div>}
@@ -182,15 +234,15 @@ export function ChatWidget() {
               {!ready && initialized && <p className="chat-notice">The assistant is currently unavailable. You can reach Awais by email below.</p>}
               {activePending && !busy && !error && ready && <div className="chat-error"><p>A previous reply is unfinished. Resume it to continue this conversation.</p><button onClick={() => void send(activePending.content, activePending)}>Resume reply</button></div>}
             </>}
-            {error && <div className="chat-error" role="alert"><p>{error}</p>{expired ? <button onClick={() => { sessionStorage.removeItem(key); savePending(null); setInitialized(false); void initialize() }}>Start a new session</button> : activePending && !busy ? <button onClick={() => void send(activePending.content, activePending)}>Retry reply</button> : !initialized && !loading ? <button onClick={() => void initialize()}>Reconnect</button> : null}</div>}
+            {error && <div className={`chat-error ${!initialized ? 'chat-offline' : ''}`} role="alert">{!initialized && <><h3>Let’s connect directly.</h3><p>The AI assistant can’t connect right now. Email or WhatsApp Awais to discuss your project, or try reconnecting.</p></>}<p className="chat-error-detail">{error}</p>{expired ? <button onClick={() => { sessionStorage.removeItem(key); savePending(null); setInitialized(false); void initialize() }}>Start a new session</button> : activePending && !busy ? <button onClick={() => void send(activePending.content, activePending)}>Retry reply</button> : !initialized && !loading ? <button onClick={() => void initialize()}>Reconnect</button> : null}</div>}
             <div ref={bottom} />
           </div>
           {chatId && messages.some((message) => message.role === 'user') && <div className="chat-brief-action"><button className="work-btn work-btn-sm chat-brief-button" disabled={busy || loading || Boolean(activePending)} onClick={() => setBriefOpen(true)}><FileText size={15} aria-hidden="true" /><span>Prepare my project brief</span><ArrowUpRight className="chat-brief-arrow" size={14} aria-hidden="true" /></button></div>}
-          <form className="chat-composer" onSubmit={submit}>
+          {(!error || initialized) && <form className="chat-composer" onSubmit={submit}>
             <label className="sr-only" htmlFor="chat-message">Your message</label>
-            <textarea ref={input} id="chat-message" rows={2} maxLength={8000} value={draft} placeholder="Your message…" disabled={!ready || !initialized || busy || loading || Boolean(activePending) || expired} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(draft) } }} />
+            <textarea ref={input} id="chat-message" rows={2} maxLength={8000} value={draft} placeholder="Ask about a project or share your idea…" disabled={!ready || !initialized || busy || loading || Boolean(activePending) || expired} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(draft) } }} />
             <button className="work-btn chat-send" type="submit" aria-label="Send message" disabled={!draft.trim() || !ready || busy || loading || Boolean(activePending) || expired}><Send size={18} /></button>
-          </form></>}
+          </form>}</>}
           <footer className="chat-footer"><a href="mailto:awaisabdullahm@gmail.com"><Mail size={13} aria-hidden="true" />Email Awais</a><a href="https://wa.me/923437836578" target="_blank" rel="noreferrer"><MessageSquare size={13} aria-hidden="true" />WhatsApp</a></footer>
         </section>
       )}
