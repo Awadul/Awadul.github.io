@@ -9,6 +9,7 @@ import { Contact } from './components/Contact'
 import { ChatWidget } from './components/ChatWidget'
 import { OwnerInbox } from './components/OwnerInbox'
 import { ScrollExperience } from './components/ScrollExperience'
+import { MembraneBackground } from './components/MembraneBackground'
 
 export default function App() {
  const [hash, setHash] = useState(window.location.hash)
@@ -19,6 +20,8 @@ export default function App() {
  }, [])
  if (hash === '#/inbox') return <OwnerInbox />
  return <div className="app-portfolio">
+  <div className="cloud-parallax" aria-hidden="true"/>
+  <MembraneBackground page/>
   <a className="skip-link" href="#main-content">Skip to content</a>
   <main id="main-content" tabIndex={-1}>
    <div id="hero" className="hero-shell"><Navigation/><Hero/></div>

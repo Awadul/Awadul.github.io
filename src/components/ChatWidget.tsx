@@ -18,6 +18,7 @@ function readPending(): PendingTurn | null {
 export function ChatWidget() {
   const [open, setOpen] = useState(false)
   const [present, setPresent] = useState(false)
+  const [revealed, setRevealed] = useState(false)
   const entered = useRef(false)
   const reveal = useRef({progress:0})
   const [showHistory, setShowHistory] = useState(false)
@@ -45,7 +46,8 @@ export function ChatWidget() {
     if (!present || !panel.current) return
     const node = panel.current
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
-    node.inert = !open
+    node.inert = true
+    setRevealed(false)
     let width=node.offsetWidth, height=node.offsetHeight
     const spiralSupported=CSS.supports('clip-path','path("M0 0 L1 0 L1 1Z")')
     const draw=()=>{
@@ -62,7 +64,7 @@ export function ChatWidget() {
       timeline.kill()
       reveal.current.progress=open?1:0
       gsap.set(node,{clearProps:'transform,opacity,clipPath,willChange'})
-      if(open)entered.current=true
+      if(open){entered.current=true;node.inert=false;setRevealed(true)}
       else finishClose()
     }
     if(preference.matches){settle();observer.disconnect();return}
@@ -73,11 +75,14 @@ export function ChatWidget() {
     }
     draw()
     gsap.set(node,{willChange:'clip-path'})
-    const duration=1.5*Math.abs((open?1:0)-reveal.current.progress)
+    const duration=Math.abs((open?1:0)-reveal.current.progress)
     // The mask cuts the real dialog surface; no decorative overlay is involved.
     timeline.to(reveal.current,{progress:open?1:0,duration,ease:'none',onUpdate:draw},0)
     timeline.eventCallback('onComplete',()=>{
-      if(open)gsap.set(node,{clearProps:'transform,opacity,clipPath,willChange'})
+      if(open){
+        gsap.set(node,{clearProps:'transform,opacity,clipPath,willChange'})
+        node.inert=false;setRevealed(true)
+      }
       else finishClose()
     })
     const changed=()=>{if(preference.matches)settle()}
@@ -121,7 +126,7 @@ export function ChatWidget() {
   }
 
   useEffect(() => { if (open && !initialized) void initialize() }, [open])
-  useEffect(() => { if (open && !loading) { if (input.current && !input.current.disabled) input.current.focus(); else panel.current?.focus() } }, [open, loading, present])
+  useEffect(() => { if (open && revealed && !loading) { if (input.current && !input.current.disabled) input.current.focus(); else panel.current?.focus() } }, [open, revealed, loading, present])
   useEffect(() => { bottom.current?.scrollIntoView({ block: 'nearest' }) }, [messages, busy, open])
 
   useEffect(() => {

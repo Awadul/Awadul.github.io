@@ -1,4 +1,4 @@
-/** A growing hurricane eye whose rotating spiral front reveals the dialog. */
+/** A solid eye expands from the center; only the outer frontier carries spiral cuts. */
 export function chatSpiralClip(progress:number,width:number,height:number):string {
  const amount=Math.max(0,Math.min(1,progress))
  if(amount>=1)return 'none'
@@ -7,11 +7,13 @@ export function chatSpiralClip(progress:number,width:number,height:number):strin
  const armCount=5
  const steps=128
  const rimSteps=24
- const reach=amount*1.3
- const front=Math.min(1,reach)
- const rotation=amount*Math.PI*1.3
+ // The solid eye grows linearly; its outer quarter carries the spiral frontier.
+ const reach=amount/.75
+ const front=reach
+ // Widening outruns rotation, so revealed content remains visible during opening.
+ const rotation=Math.log1p(amount*10)
  const point=(r:number,angle:number)=>`${(width/2+Math.cos(angle)*r).toFixed(2)} ${(height/2+Math.sin(angle)*r).toFixed(2)}`
- const spread=(r:number)=>Math.PI/armCount*Math.min(1,Math.max(0,(reach-r)/.3))
+ const spread=(r:number)=>Math.PI/armCount*Math.min(1,Math.max(0,(1-r/front)/.25))
  const arms=Array.from({length:armCount},(_,arm)=>{
   const base=arm*Math.PI*2/armCount+rotation
   const angle=(r:number)=>base+(1-r)*Math.PI*4

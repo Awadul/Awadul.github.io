@@ -14,6 +14,13 @@ export function ScrollExperience(){
    gsap.fromTo(progress.current,{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:true}})
    sections.forEach((id,index)=>ScrollTrigger.create({trigger:`#${id}`,start:'top 35%',endTrigger:index<sections.length-1?`#${sections[index+1]}`:undefined,end:index<sections.length-1?'top 35%':'bottom top',onToggle:self=>{if(self.isActive)setActive(id)}}))
    media.add('(prefers-reduced-motion: no-preference)',()=>{
+    // Overscan keeps the cloud photograph covering the viewport at both extremes.
+    // One scroll-linked transform owns the background; the mesh remains a nearer plane.
+    gsap.fromTo('.cloud-parallax',
+     {y:()=>window.innerHeight*.16},
+     {y:()=>-window.innerHeight*.16,ease:'none',force3D:true,
+      scrollTrigger:{start:0,end:'max',scrub:true,invalidateOnRefresh:true}}
+    )
     // Each layer has one viewport-motion owner.
     const focusCleanups:Array<()=>void>=[]
     sections.forEach(id=>{
