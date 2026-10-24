@@ -1,15 +1,16 @@
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from 'react'
 import { gsap } from 'gsap'
 import { chatSpiralClip } from '../lib/chat-motion'
-import { MessageSquare, X, Plus, Send, Trash2, History, FileText, ArrowUpRight, Mail } from 'lucide-react'
+import { MessageSquare, ChevronLeft, Ellipsis, Plus, Send, Trash2, FileText, ArrowUpRight, Mail } from 'lucide-react'
 import { ChatError, chatApi, chatConfigured, readHistory, type Chat, type Message, type PendingTurn } from '../lib/chat-api'
 import '../styles/chat.css'
 import { ProjectBrief } from './ProjectBrief'
 import { ChatProjects, ChatText } from './ChatProjects'
+import assistantPortrait from '../assets/portrait-cutout.webp'
 
 const key = 'portfolio-chat-session'
 const pendingKey = 'portfolio-chat-pending'
-const suggestions = ['What can you build for my business?', 'Tell me about your AI projects.', 'I need a custom CRM.']
+const suggestions = ['What can you build for my business?', 'Tell me about your AI projects.']
 
 function readPending(): PendingTurn | null {
   try { return JSON.parse(sessionStorage.getItem(pendingKey) || 'null') } catch { return null }
@@ -90,6 +91,17 @@ export function ChatWidget() {
     return()=>{timeline.kill();observer.disconnect();preference.removeEventListener('change',changed)}
   },[open,present])
 
+  useLayoutEffect(() => {
+    const field = input.current
+    if (!field) return
+    const fit = () => {
+      field.style.height = 'auto'
+      field.style.height = `${Math.min(112, Math.max(44, field.scrollHeight))}px`
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [draft, present, briefOpen, error, initialized])
   function report(cause: unknown) {
     setError(cause instanceof Error ? cause.message : 'Something went wrong. Please try again.')
     if (cause instanceof ChatError && cause.status === 401) setExpired(true)
@@ -220,7 +232,11 @@ export function ChatWidget() {
     <div className="chat-widget">
       {present && (
         <section aria-hidden={!open} ref={panel} tabIndex={-1} className={`chat-panel ${error && !initialized ? 'is-offline' : ''}`} role="dialog" aria-label="Ask about Awais's work" onKeyDown={(event) => { if (event.key === 'Escape') close() }}>
-          <header className="chat-header"><div><h2>Awais’s assistant</h2><p>AI guide to projects & services</p></div><div className="chat-header-actions"><button className="chat-icon" onClick={() => setShowHistory((value) => !value)} aria-label="Show conversation history" aria-expanded={showHistory} aria-controls="chat-controls" title="Conversation history"><History size={18} /></button><button className="chat-icon" onClick={close} aria-label="Close chat"><X size={20} /></button></div></header>
+          <header className="chat-header">
+            <button className="work-btn work-btn-ghost chat-icon" onClick={close} aria-label="Close chat" title="Close chat"><ChevronLeft size={18} aria-hidden="true"/></button>
+            <div className="chat-header-title"><h2>{chatId ? chats.find(chat => chat.id === chatId)?.title || 'Conversation' : 'New chat'}</h2><p>Awais’s assistant</p></div>
+            <button className="work-btn work-btn-ghost chat-icon" onClick={() => setShowHistory(value => !value)} aria-label="Conversation options" disabled={briefOpen} aria-expanded={showHistory} aria-controls="chat-controls" title="Conversation options"><Ellipsis size={19} aria-hidden="true"/></button>
+          </header>
           <div className={`chat-connection ${ready && initialized ? 'is-ready' : ''}`} role="status"><span aria-hidden="true"/>{loading ? 'Connecting to your conversation…' : ready && initialized ? 'Ready to help' : 'Assistant unavailable — direct contact is open'}</div>
           {!briefOpen && showHistory && <div className="chat-toolbar" id="chat-controls">
             <label className="sr-only" htmlFor="chat-history">Conversation history</label>
@@ -228,9 +244,16 @@ export function ChatWidget() {
             <button className="chat-icon" disabled={busy || loading} onClick={() => void selectChat('')} aria-label="New conversation"><Plus size={18} /></button>
             <button className="chat-icon" disabled={busy || loading || !chatId} onClick={() => void deleteChat()} aria-label="Delete conversation"><Trash2 size={17} /></button>
           </div>}
-          {briefOpen ? <ProjectBrief key={chatId} chatId={chatId} token={token} initialBrief={preparedBrief?.chatId === chatId && preparedBrief.last_message_id === messages.filter((message) => message.role === 'user').at(-1)?.id ? preparedBrief.content : undefined} onBack={() => setBriefOpen(false)} /> : <><div className="chat-transcript" aria-busy={busy || loading}>
+          {briefOpen ? <ProjectBrief key={chatId} chatId={chatId} token={token} initialBrief={preparedBrief?.chatId === chatId && preparedBrief.last_message_id === messages.filter((message) => message.role === 'user').at(-1)?.id ? preparedBrief.content : undefined} onBack={() => setBriefOpen(false)} /> : <><div className={`chat-transcript ${messages.length === 0 && !activePending ? 'is-empty' : ''}`} aria-busy={busy || loading}>
             {loading ? <p className="chat-notice" role="status">Loading your conversation…</p> : <>
-              {messages.length === 0 && !activePending && !error && <div className="chat-welcome"><h3>Explore the work.<br/>Find your next step.</h3><p className="chat-notice">Ask about projects, services, or the software you have in mind.</p><div className="chat-suggestions">{suggestions.map((suggestion, index) => <button key={suggestion} disabled={!ready || busy || !initialized} onClick={() => void send(suggestion)}><span>{['Explore services', 'See AI projects', 'Discuss a custom CRM'][index]}</span><ArrowUpRight size={16} aria-hidden="true"/></button>)}</div></div>}
+              {messages.length === 0 && !activePending && <div className="chat-welcome">
+                <div className="chat-assistant-card">
+                  <div className="chat-assistant-identity"><img src={assistantPortrait} alt="" width={36} height={36}/><div><h3>Awais’s assistant</h3><p>AI guide to projects & services</p></div></div>
+                  <p className="chat-assistant-summary">Ask about projects, services, or the software you have in mind.</p>
+                </div>
+                {!error && <div className="chat-starters"><p>Try asking</p><div className="chat-suggestions">{suggestions.map(suggestion => <button key={suggestion} disabled={!ready || busy || !initialized} onClick={() => void send(suggestion)}><span>{suggestion}</span><ArrowUpRight size={15} aria-hidden="true"/></button>)}</div></div>}
+              </div>}
+
               <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
                 {messages.map((message) => <div className={`chat-message chat-message-${message.role}`} key={message.id}><span>{message.role === 'user' ? 'You' : 'AI assistant'}</span><p><ChatText content={message.content} /></p>{message.role === 'assistant' && <ChatProjects content={message.content} />}</div>)}
                 {pendingVisible && <div className="chat-message chat-message-user"><span>You</span><p>{activePending.content}</p></div>}
@@ -242,13 +265,13 @@ export function ChatWidget() {
             {error && <div className={`chat-error ${!initialized ? 'chat-offline' : ''}`} role="alert">{!initialized && <><h3>Let’s connect directly.</h3><p>The AI assistant can’t connect right now. Email or WhatsApp Awais to discuss your project, or try reconnecting.</p></>}<p className="chat-error-detail">{error}</p>{expired ? <button onClick={() => { sessionStorage.removeItem(key); savePending(null); setInitialized(false); void initialize() }}>Start a new session</button> : activePending && !busy ? <button onClick={() => void send(activePending.content, activePending)}>Retry reply</button> : !initialized && !loading ? <button onClick={() => void initialize()}>Reconnect</button> : null}</div>}
             <div ref={bottom} />
           </div>
-          {chatId && messages.some((message) => message.role === 'user') && <div className="chat-brief-action"><button className="work-btn work-btn-sm chat-brief-button" disabled={busy || loading || Boolean(activePending)} onClick={() => setBriefOpen(true)}><FileText size={15} aria-hidden="true" /><span>Prepare my project brief</span><ArrowUpRight className="chat-brief-arrow" size={14} aria-hidden="true" /></button></div>}
+
           {(!error || initialized) && <form className="chat-composer" onSubmit={submit}>
             <label className="sr-only" htmlFor="chat-message">Your message</label>
-            <textarea ref={input} id="chat-message" rows={2} maxLength={8000} value={draft} placeholder="Ask about a project or share your idea…" disabled={!ready || !initialized || busy || loading || Boolean(activePending) || expired} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(draft) } }} />
+            <textarea ref={input} id="chat-message" rows={1} maxLength={8000} value={draft} placeholder="Ask about a project or share your idea…" disabled={!ready || !initialized || busy || loading || Boolean(activePending) || expired} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(draft) } }} />
             <button className="work-btn chat-send" type="submit" aria-label="Send message" disabled={!draft.trim() || !ready || busy || loading || Boolean(activePending) || expired}><Send size={18} /></button>
           </form>}</>}
-          <footer className="chat-footer"><a href="mailto:awaisabdullahm@gmail.com"><Mail size={13} aria-hidden="true" />Email Awais</a><a href="https://wa.me/923437836578" target="_blank" rel="noreferrer"><MessageSquare size={13} aria-hidden="true" />WhatsApp</a></footer>
+          {(showHistory || Boolean(error) || briefOpen) && <footer className="chat-footer"><a href="mailto:awaisabdullahm@gmail.com"><Mail size={13} aria-hidden="true" />Email Awais</a><a href="https://wa.me/923437836578" target="_blank" rel="noreferrer"><MessageSquare size={13} aria-hidden="true" />WhatsApp</a>{!briefOpen && chatId && messages.some((message) => message.role === 'user') && <button className="work-btn work-btn-sm chat-brief-button" aria-label="Prepare my project brief" title="Prepare my project brief" disabled={busy || loading || Boolean(activePending)} onClick={() => setBriefOpen(true)}><FileText size={15} aria-hidden="true" /><span>Project brief</span></button>}</footer>}
         </section>
       )}
       <button ref={launcher} className="work-btn chat-launcher" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={open ? 'Close project chat' : 'Ask about my work'}><MessageSquare size={20} aria-hidden="true" /><span className="chat-launcher-label">Ask about my work</span><span className="chat-launcher-short" aria-hidden="true">{open ? 'Close' : 'Chat'}</span></button>

@@ -15,3 +15,6 @@ src/assets/portrait-cutout.webp is a built-in ImageGen transparent extraction of
 
 ## Preserved functionality
 Project URLs, code links, contact links, NUST policy RAG evidence, technology marks, visitor history, enquiry review/consent, owner inbox and backend logic remain intact. App styles remain split by section. The original reference video is research material and is not embedded or represented as the user’s work.
+
+## Chat assistant surface — selected dark reference
+The October 24 user-selected chatbot screenshot overrides the previous white assistant treatment for this component. Use a dark charcoal conversation canvas, slim navigation with back/close and options, a compact assistant identity card, open central space, two bottom-aligned starter questions, and a narrow pill composer. History, contact and brief tools live in the options area. Use the real portrait and existing project content; do not import reference model names, follower counts or unsupported voice controls. Preserve the growing-eye reveal, one-second linear timing, delayed input focus, conversation history, recovery and enquiry consent. The portfolio outside the chat keeps its portrait-and-clouds design.
