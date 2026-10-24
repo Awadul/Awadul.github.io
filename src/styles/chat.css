@@ -51,7 +51,7 @@
 .chat-composer:focus-within { border-color:#92959d; }
 .chat-composer textarea { flex:1; min-width:0; height:44px; min-height:44px; max-height:112px; padding:10px 0; resize:none; overflow-y:auto; background:transparent; color:var(--chat-text); border:0; border-radius:0; box-shadow:none; font:400 16px/24px var(--font-ui); caret-color:#fff; scrollbar-width:thin; }
 .chat-composer textarea:focus { outline:none; }
-.chat-composer textarea::placeholder { color:#b8bac0; }
+.chat-composer textarea::placeholder { color:#b8bac0; font-size:13px; }
 .chat-widget .chat-send { flex:0 0 44px; width:44px; height:44px; min-height:44px; padding:0; color:#151618; background:#e3e4e7; border:0; border-radius:50%; box-shadow:none; }
 .chat-widget .chat-send:hover:not(:disabled) { color:#111; background:#fff; }
 .chat-widget .chat-send:disabled { opacity:1; color:#aeb0b6; background:#3b3d43; cursor:not-allowed; }
