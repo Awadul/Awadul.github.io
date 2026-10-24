@@ -1,42 +1,40 @@
-.owner-inbox { min-height: 100dvh; background: var(--paper); color: var(--ink); padding: clamp(20px, 4vw, 56px); }
-.owner-inbox > header { display: flex; justify-content: space-between; align-items: start; gap: 20px; max-width: 1280px; margin: 0 auto 32px; }
-.owner-inbox h1 { font-size: clamp(28px, 4vw, 42px); color: var(--ink); font-weight: 750; line-height: 1.2; margin: 16px 0 8px; }
-.owner-inbox h2 { font-size: 24px; color: var(--ink); font-weight: 700; margin-bottom: 16px; }
-.owner-inbox h3 { font-size: 16px; color: var(--ink); font-weight: 700; }
-.owner-inbox p { line-height: 1.65; font-size: 14px; }
-.owner-inbox a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
-.owner-inbox .work-btn { border-radius: 0; box-shadow: none; background: var(--ink); color: var(--paper); border: 0; }
-.owner-inbox .work-btn-ghost { background: transparent; color: var(--ink); }
-.owner-inbox .work-btn:hover { background: var(--ink); color: var(--paper); }
-.owner-inbox .work-btn:disabled { background: var(--muted-paper); color: var(--ink); opacity: .6; }
-.owner-inbox .work-input, .owner-inbox .work-select { border-radius: 0; background: var(--paper); color: var(--ink); border: 1px solid var(--muted-paper); width: 100%; margin-top: 6px; }
-.owner-inbox label { font-size: 13px; display: block; font-weight: 600; }
-.inbox-login { max-width: 420px; margin: 64px auto; }
+/* Owner inbox (#/inbox): same Swiss tokens, denser. Selected row inverts to black. */
+.owner-inbox { min-height: 100dvh; padding: clamp(20px, 4vw, 56px); background: var(--swiss-white); color: var(--swiss-black); }
+.owner-inbox > header { display: flex; justify-content: space-between; align-items: start; gap: 20px; max-width: var(--container); margin: 0 auto 32px; padding-bottom: 24px; border-bottom: var(--line-thick) solid var(--swiss-black); }
+.owner-inbox h1 { margin: 16px 0 8px; font-size: clamp(2.25rem, 5vw, 4rem); line-height: .92; letter-spacing: -.05em; }
+.owner-inbox h2 { margin-bottom: 16px; font-size: 1.75rem; line-height: 1; letter-spacing: -.04em; }
+.owner-inbox h3 { font-size: 1.125rem; line-height: 1.1; letter-spacing: -.02em; }
+.owner-inbox p { font-size: .9375rem; line-height: 1.6; }
+.owner-inbox a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.owner-inbox a:hover { background: var(--swiss-red); }
+.owner-inbox label { display: block; font: 700 var(--fs-label)/1.4 var(--font-ui); text-transform: uppercase; letter-spacing: .12em; }
+.owner-inbox .work-input, .owner-inbox .work-select { width: 100%; margin-top: 6px; font: 400 .9375rem var(--font-ui); text-transform: none; letter-spacing: 0; }
+.inbox-login { max-width: 420px; margin: 64px auto; padding: 32px; border: var(--line-thick) solid var(--swiss-black); }
 .inbox-login label { margin: 24px 0 16px; }
-.inbox-status, .inbox-notice, .inbox-layout { max-width: 1280px; margin: 0 auto; }
+.inbox-status, .inbox-notice, .inbox-layout { max-width: var(--container); margin: 0 auto; }
 .inbox-status { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; }
-.inbox-status > div { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--ink); }
-.inbox-notice { background: var(--paper); padding: 12px 16px; color: var(--ink); margin-bottom: 16px; }
-.inbox-layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); border-top: 1px solid var(--muted-paper); }
-.inbox-layout aside { border-right: 1px solid var(--muted-paper); }
-.inbox-row { display: block; width: 100%; text-align: left; padding: 20px; border-bottom: 1px solid var(--muted-paper); background: transparent; cursor: pointer; }
-.inbox-row:hover, .inbox-row.is-selected { background: var(--paper); }
-.inbox-row > span { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; font-size: 12px; color: var(--ink); }
-.inbox-row > strong { display: block; margin: 8px 0; font-size: 15px; color: var(--ink); overflow-wrap: anywhere; }
-.inbox-row p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.inbox-row time { display: block; font-size: 11px; color: var(--ink); margin-top: 12px; }
+.inbox-status > div { display: flex; align-items: center; gap: 12px; font: 700 var(--fs-label)/1.4 var(--font-ui); text-transform: uppercase; letter-spacing: .12em; }
+.inbox-notice { margin-bottom: 16px; padding: 12px 16px; border: var(--line-thin) solid var(--swiss-black); background: var(--swiss-muted); }
+.inbox-layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); border: var(--line-thin) solid var(--swiss-black); }
+.inbox-layout aside { border-right: var(--line-thin) solid var(--swiss-black); }
+.inbox-row { display: block; width: 100%; padding: 20px; text-align: left; background: transparent; border-bottom: var(--line-thin) solid var(--swiss-black); transition: background-color var(--ease), color var(--ease); }
+.inbox-row:hover { background: var(--swiss-red); color: var(--swiss-black); }
+.inbox-row.is-selected { background: var(--swiss-black); color: var(--swiss-white); }
+.inbox-row > span { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font: 700 var(--fs-label)/1.4 var(--font-ui); text-transform: uppercase; letter-spacing: .12em; }
+.inbox-row > strong { display: block; margin: 8px 0; font-size: 1rem; overflow-wrap: anywhere; }
+.inbox-row p { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.inbox-row time { display: block; margin-top: 12px; font-size: .75rem; }
 .inbox-layout aside nav { display: flex; justify-content: space-between; padding: 12px; }
-.inbox-detail { padding: 28px; min-width: 0; }
-.inbox-enquiry { background: var(--paper); padding: 20px; margin-bottom: 24px; }
-.inbox-enquiry label { margin: 16px 0; max-width: 240px; }
+.inbox-detail { min-width: 0; padding: 28px; }
+.inbox-enquiry { margin-bottom: 24px; padding: 20px; background: var(--swiss-muted); border: var(--line-thin) solid var(--swiss-black); border-left-width: 8px; }
+.inbox-enquiry label { max-width: 240px; margin: 16px 0; }
 .inbox-enquiry > h3 { margin: 20px 0 8px; }
-.inbox-summary { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--muted-paper); }
+.inbox-summary { margin-bottom: 32px; padding-bottom: 24px; border-bottom: var(--line-thin) solid var(--swiss-black); }
 .inbox-summary > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
-.inbox-copy { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 72ch; }
-.inbox-message { padding: 16px 0; border-bottom: 1px solid var(--muted-paper); }
-.inbox-message > strong { font-size: 12px; color: var(--ink); display: block; margin-bottom: 6px; }
+.inbox-copy { max-width: 72ch; white-space: pre-wrap; overflow-wrap: anywhere; }
+.inbox-message { padding: 16px 0; border-bottom: var(--line-thin) solid var(--swiss-black); }
+.inbox-message > strong { display: block; margin-bottom: 6px; font: 700 var(--fs-label)/1.4 var(--font-ui); text-transform: uppercase; letter-spacing: .14em; }
 .inbox-empty { padding: 28px 0; }
-.inbox-error { position: fixed; bottom: 20px; left: 20px; right: 20px; padding: 16px; color: var(--paper); background: var(--ink); z-index: 80; max-width: 640px; margin: auto; }
-.owner-inbox :is(button, input, select, a):focus-visible { outline: 2px solid var(--editorial-red); outline-offset: 3px; }
-.owner-inbox ::selection { background: var(--muted-paper); color: var(--ink); }
-@media (max-width: 760px) { .inbox-layout { grid-template-columns: 1fr; } .inbox-layout aside { border-right: 0; max-height: 360px; overflow-y: auto; } .inbox-detail { padding: 24px 0; } .inbox-status { flex-wrap: wrap; } }
+.inbox-error { position: fixed; z-index: 80; right: 20px; bottom: 20px; left: 20px; max-width: 640px; margin: auto; padding: 16px; background: var(--swiss-black); color: var(--swiss-white); border: var(--line-thick) solid var(--swiss-red); }
+.owner-inbox :is(button, input, select, a):focus-visible { outline: 2px solid var(--swiss-red); outline-offset: 2px; }
+@media (max-width: 760px) { .inbox-layout { grid-template-columns: 1fr; } .inbox-layout aside { max-height: 360px; overflow-y: auto; border-right: 0; border-bottom: var(--line-thin) solid var(--swiss-black); } .inbox-detail { padding: 24px 16px; } .inbox-status { flex-wrap: wrap; } }

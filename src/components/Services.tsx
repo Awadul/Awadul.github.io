@@ -1,64 +1,63 @@
-import { Database, Workflow, PanelsTopLeft, ArrowUpRight } from 'lucide-react'
+import { useState, useRef, useLayoutEffect } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowUpRight, X } from 'lucide-react'
+import crm from '../assets/Projects/cargo-express-freight.png'
+import recruitment from '../assets/Projects/mynext9to5.png'
+import website from '../assets/Projects/radwi-website.jpg'
 import '../styles/services.css'
-
-const services = [
-  {
-    id: 'platform', icon: Database, title: 'Business applications',
-    category: 'Custom business applications',
-    description: 'Custom software that brings your team’s workflows and data together.',
-    deliverables: ['CRMs & dashboards', 'APIs & integrations', 'Databases & full-stack builds'],
-    example: 'Cargo Express Freight CRM',
-  },
-  {
-    id: 'automation', icon: Workflow, title: 'AI & automation',
-    category: 'AI integrations & automation',
-    description: 'Automate document processing, data collection, and knowledge search.',
-    deliverables: ['PDF parsing & data extraction', 'LLM integrations & retrieval', 'Scraping & workflow automation'],
-    example: 'MyNext9to5 & NUST Guide Bot',
-  },
-  {
-    id: 'website', icon: PanelsTopLeft, title: 'Websites & interfaces',
-    category: 'Websites & frontend development',
-    description: 'Responsive websites and product interfaces that make your offering clear.',
-    deliverables: ['React & Next.js development', 'Components & design systems', 'Website redesigns'],
-    example: 'RADWI & Pixal Craft',
-  },
+gsap.registerPlugin(ScrollTrigger)
+const services=[
+ {title:'WEB DESIGN & DEVELOPMENT',description:'Clear, responsive websites and interfaces built around your business and the people who use them.',items:'React & Next.js · Product interfaces · Design systems',image:website,alt:'RADWI corporate website',example:'RADWI corporate platform'},
+ {title:'AI & AUTOMATION',description:'Connect AI to the work that takes your team’s time, from parsing documents to searching knowledge and moving data.',items:'LLM integrations · Document processing · Workflow automation',image:recruitment,alt:'MyNext9to5 recruitment platform',example:'MyNext9to5'},
+ {title:'BUSINESS APPLICATIONS',description:'Custom software that brings your customers, operations and data together in one practical workflow.',items:'CRMs & dashboards · APIs & integrations · Relational databases',image:crm,alt:'Cargo Express Freight CRM dashboard',example:'Cargo Express Freight CRM'},
 ]
-
-export function Services() {
-  return (
-    <section id="services" className="services-section" aria-labelledby="services-title">
-      <div className="services-container">
-        <header className="services-header">
-          <h2 id="services-title">How I can help</h2>
-          <p>I build the software, connect the systems, and automate the work that slows your team down.</p>
-        </header>
-        <div className="services-list">
-          {services.map(service => (
-            <a key={service.id} href={`mailto:awaisabdullahm@gmail.com?subject=${encodeURIComponent(`Project enquiry: ${service.category}`)}`} className={`service-row service-${service.id}`}>
-              <div className="service-heading">
-                <service.icon className="service-icon" size={24} aria-hidden="true" />
-                <h3>{service.title}</h3>
-              </div>
-              <div className="service-content">
-                <p className="service-description">{service.description}</p>
-                <ul aria-label="What I provide">{service.deliverables.map(item => <li key={item}>{item}</li>)}</ul>
-                <p className="service-evidence"><span>Related work</span>{service.example}</p>
-              </div>
-              <span className="service-action">Discuss this service <ArrowUpRight size={16} aria-hidden="true" /></span>
-            </a>
-          ))}
-        </div>
-        <div className="services-process">
-          <h3>A clear process, from scope to handover.</h3>
-          <ol>
-            <li><strong>Define the scope</strong><p>Clarify the users, workflows, and priorities before development.</p></li>
-            <li><strong>Build & review</strong><p>Review the working interface and refine the details together.</p></li>
-            <li><strong>Launch & hand over</strong><p>Prepare deployment, documentation, and the next steps for maintaining the software.</p></li>
-          </ol>
-          <a className="work-btn" href="#contact">Tell me what you need <ArrowUpRight size={18} aria-hidden="true" /></a>
-        </div>
-      </div>
-    </section>
-  )
+export function Services(){
+ const [open,setOpen]=useState<number|null>(null)
+ const section=useRef<HTMLElement>(null)
+ useLayoutEffect(()=>{
+  if(!section.current)return
+  const media=gsap.matchMedia()
+  media.add('(prefers-reduced-motion: no-preference)',()=>{
+   const host=section.current!
+   gsap.fromTo(host.querySelector('.display-heading'),{opacity:0,y:12},{
+    opacity:1,y:0,duration:.65,ease:'expo.out',
+    scrollTrigger:{trigger:host,start:'top 85%',toggleActions:'play none none reverse'}
+   })
+   const rows=Array.from(host.querySelectorAll<HTMLElement>('.service-row'))
+   const cleanups=rows.map((row,index)=>{
+    // Only the entrance owns the row transform; CSS owns disclosure geometry.
+    const reveal=gsap.fromTo(row,{x:window.innerWidth<=640?-24:-48,opacity:0},{
+     x:0,opacity:1,duration:.75,delay:index*.12,ease:'power4.out',paused:true
+    })
+    const trigger=ScrollTrigger.create({trigger:row,start:'top 94%',end:'bottom top',animation:reveal,toggleActions:'play reverse play reverse'})
+    const showFocused=()=>reveal.progress(1).pause()
+    row.addEventListener('focusin',showFocused)
+    return()=>{row.removeEventListener('focusin',showFocused);trigger.kill();reveal.revert()}
+   })
+   return()=>cleanups.forEach(cleanup=>cleanup())
+  })
+  return()=>media.revert()
+ },[])
+ useLayoutEffect(()=>{
+  if(open===null||!section.current)return
+  const media=gsap.matchMedia()
+  media.add('(prefers-reduced-motion: no-preference)',()=>{
+   gsap.fromTo(section.current!.querySelectorAll('.is-open .service-preview img'),
+    {y:14,opacity:0},{y:0,opacity:1,duration:.4,ease:'power3.out',clearProps:'transform,opacity'})
+  })
+  return()=>media.revert()
+ },[open])
+ return <section ref={section} id="services" className="services-section" aria-labelledby="services-title"><div className="section-inner"><header className="display-heading left-heading"><span className="section-watermark" aria-hidden="true">SERVICES</span><h2 id="services-title">/SERVICES</h2></header>
+  <div className="services-list">{services.map((item,index)=><article key={item.title} className={`service-row ${open===index?'is-open':''}`}>
+   <h3><button id={`service-button-${index}`} className="service-toggle" aria-expanded={open===index} aria-controls={`service-detail-${index}`} onClick={()=>setOpen(open===index?null:index)}>{item.title}{open===index?<X size={27} aria-hidden="true"/>:<ArrowUpRight size={27} aria-hidden="true"/>}</button></h3>
+   <div id={`service-detail-${index}`} className="service-expansion" role="region" aria-labelledby={`service-button-${index}`} aria-hidden={open!==index}>
+    <div className="service-content">
+     <div className="service-details"><p>{item.description}</p><p className="service-deliverables">{item.items}</p><a tabIndex={open===index?0:-1} href={`mailto:awaisabdullahm@gmail.com?subject=${encodeURIComponent(`Project enquiry: ${item.title}`)}`}>Discuss this service <ArrowUpRight size={15} aria-hidden="true"/></a></div>
+     <figure className="service-preview service-preview-mobile"><img src={item.image} alt={item.alt} loading="lazy"/><figcaption>{item.example}</figcaption></figure>
+    </div>
+   </div>
+   <figure className="service-preview service-preview-desktop" aria-hidden={open!==index}><img src={item.image} alt={item.alt} loading="lazy"/><figcaption>{item.example}</figcaption></figure>
+  </article>)}</div>
+ </div></section>
 }

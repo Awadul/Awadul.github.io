@@ -60,7 +60,7 @@
       port: 3000,
       open: true,
       watch: {
-        ignored: ['**/backend/**', '**/docs/**'],
+        ignored: ['**/backend/**', '**/docs/**', '**/*.rar', '**/*.zip'],
       },
       fs: {
         deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', '**/backend/**', '**/PersonalInfo.json'],

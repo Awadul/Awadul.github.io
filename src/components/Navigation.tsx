@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useState, useRef, useLayoutEffect } from 'react'
+import { gsap } from 'gsap'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
-const items = [['Selected work', 'projects'], ['About', 'about'], ['Services', 'services'], ['Toolkit', 'tech'], ['Contact', 'contact']]
+const items = [['Work','projects'],['Services','services'],['Experience','about'],['Contact','contact']]
 export function Navigation() {
- const [open, setOpen] = useState(false)
+ const [open,setOpen] = useState(false)
+ const menu = useRef<HTMLElement>(null)
+ useLayoutEffect(() => {
+  if (!open || !menu.current) return
+  const media=gsap.matchMedia()
+  media.add('(prefers-reduced-motion: no-preference)',()=>{gsap.from(menu.current!.querySelectorAll('a'),{opacity:0,y:8,duration:.35,stagger:.05,ease:'power3.out',clearProps:'transform,opacity'})})
+  return ()=>media.revert()
+ },[open])
  return <header className="masthead">
-  <div className="edition-line"><span>Independent developer · Pakistan</span><span>Portfolio / Vol. 01</span><span>Open to collaboration</span></div>
-  <div className="masthead-main"><a className="masthead-name" href="#hero">Awais Abdullah<span>Software, thoughtfully built.</span></a>
-   <nav aria-label="Primary navigation" className="desktop-nav">{items.map(([label,id])=><a key={id} href={`#${id}`}>{label}</a>)}</nav>
-   <a className="work-btn masthead-cta" href="#contact">Let’s talk <ArrowUpRight size={16} aria-hidden="true" /></a>
-   <button className="work-btn work-btn-ghost mobile-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="mobile-navigation" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
-  </div>
-  {open && <nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">{items.map(([label,id])=><a key={id} href={`#${id}`} onClick={()=>setOpen(false)}>{label}<ArrowUpRight size={18} aria-hidden="true"/></a>)}</nav>}
+  <a className="availability" href="#contact"><span aria-hidden="true"/>Available for new projects</a>
+  <nav className="desktop-nav" aria-label="Primary navigation">{items.map(([label,id])=><a key={id} href={`#${id}`}>{label}{id==='projects' && <small>[06]</small>}</a>)}</nav>
+  <a className="work-btn navigation-cta" href="#contact">Let’s talk <ArrowUpRight size={15} aria-hidden="true"/></a>
+  <button className="work-btn work-btn-ghost mobile-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="mobile-navigation" onClick={()=>setOpen(!open)}>{open?<X size={20}/>:<Menu size={20}/>}</button>
+  {open && <nav ref={menu} id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">{items.map(([label,id])=><a key={id} href={`#${id}`} onClick={()=>setOpen(false)}>{label}<ArrowUpRight size={17} aria-hidden="true"/></a>)}</nav>}
  </header>
 }

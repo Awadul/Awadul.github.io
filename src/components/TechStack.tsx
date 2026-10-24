@@ -1,5 +1,4 @@
 import '../styles/tech-stack.css'
-
 const logoFiles = import.meta.glob('../assets/technologies/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
 const groups = [
   {
@@ -21,33 +20,5 @@ const groups = [
   },
 ]
 
-export function TechStack() {
-  return (
-    <section id="tech" className="tech-section" aria-labelledby="tech-heading">
-      <div className="tech-container">
-        <div className="tech-header">
-          <h2 id="tech-heading">My tech stack.</h2>
-          <p>The tools I use to build interfaces, connect systems, and automate work.</p>
-        </div>
-        <div className="tech-category-list">
-          {groups.map((group) => (
-            <div className="tech-category" key={group.name}>
-              <div className="tech-category-heading"><h3>{group.name}</h3><p>{group.description}</p></div>
-              <div className="tech-category-content">
-                <ul className="tech-category-tools" aria-label={`${group.name} technologies`}>
-                  {group.technologies.map((technology) => (
-                    <li key={technology.name}>
-                      <img className={`tech-brand-mark${technology.logo === 'express' ? ' tech-brand-on-light' : ''}`} src={logoFiles[`../assets/technologies/${technology.logo}.png`]} alt="" width={32} height={32} loading="lazy" />
-                      <span>{technology.name}</span>
-                    </li>
-                  ))}
-                </ul>
-                {group.methods && <p className="tech-methods">{group.methods}</p>}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+
+export function TechStack(){return <section id="tech" className="tech-section panel" aria-labelledby="tech-heading"><header><h2 id="tech-heading">/THE TOOLKIT</h2><p>The tools behind the work.</p></header><div className="tech-category-list">{groups.map(group=><div className="tech-category" key={group.name}><h3>{group.name}</h3><ul>{group.technologies.map(tool=><li key={tool.name}><img src={logoFiles[`../assets/technologies/${tool.logo}.png`]} alt="" width={24} height={24} loading="lazy"/><span>{tool.name}</span></li>)}</ul></div>)}</div></section>}

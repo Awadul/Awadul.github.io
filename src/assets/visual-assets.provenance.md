@@ -1,0 +1,7 @@
+# Generated assets — October 24, 2026
+
+Built-in image_gen was used, with no API fallback.
+
+portrait-cutout.webp: transparent extraction of awais-editorial-portrait.png, resized to at most 960x1200 and WebP encoded with alpha. Prompt: Use case: background-extraction. Asset type: transparent PNG portrait cutout for a portfolio website hero. Input image is the edit target. Remove only the light gray photographic background and produce real alpha transparency behind the person, including clean natural hair edges. Preserve the same person, face, eyes, beard, hair, expression, skin texture, lighting, dark suit, black shirt, upper-body pose, original visible framing and proportions. No redesign, invented pose, retouching, new content, shadow or backdrop. Keep 4:5 framing. Generated extraction has slightly smoother facial texture than the source.
+
+clouds.webp: generated 1536x1024 raster, WebP encoded at quality 85. Prompt: A soft, photoreal monochrome cloud sky with very pale gray open air through the broad quiet center, bright white fluffy cumulus clouds clustering along the left, right, and lower edges, just a little cloud at upper corners. Wide full-bleed landscape, crop-safe, open center for portfolio panels. Diffused daylight, airy and calm, subtle photographic texture, very low contrast. Neutral grayscale only. No webpage, interface, text, panels, frames, objects, sun disk, horizon, buildings, birds, dark storm clouds, dramatic contrast, illustrations, or artificial gradients.

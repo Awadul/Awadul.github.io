@@ -17,7 +17,7 @@ Existing React 18, TypeScript, Vite, Tailwind 4 and prefixed daisyUI components.
 Existing project screenshots in src/assets/Projects and profile portrait in src/assets/sideimage.jpg. The user previously confirmed no genuine client reviews have been collected. Do not invent client attribution or performance metrics.
 
 ## Brand Commitments
-User's October 14 brief replaces the blue identity with the supplied Newsprint system: light paper, black ink, restrained red, square geometry and editorial typography. Earlier user requests prioritize compact project discovery and concise client-facing language.
+The October 24 video and screenshots replace the Swiss system: portrait-led white panels, outline name typography, grayscale cloud canvas, restrained charcoal type, thin rules and pill controls. See DESIGN.md. Earlier user requests prioritize compact project discovery and concise client-facing language.
 
 ## Product Principles
 - Let deployed work establish credibility.

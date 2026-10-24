@@ -1,0 +1,7 @@
+:root {
+ --canvas:#d5d5d3; --surface:#fff; --surface-soft:#f8f8f7; --ink:#242424; --muted:#717171; --line:#dededc; --inverse:#f9f9f7; --status:#16b56b;
+ --font-ui:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+ --container:1160px; --space-section:clamp(56px,8vw,112px); --ease:.22s ease; --line-thin:1px; --line-thick:1px; --fs-label:11px; --fs-body:16px;
+ --swiss-white:var(--surface); --swiss-black:var(--ink); --swiss-muted:#f2f2f0; --swiss-red:#b8372d; --swiss-black-soft:#646464; --swiss-white-soft:#b9b9b9;
+ --paper:var(--surface); --rule:var(--line); --caption:var(--muted); --muted-paper:#f2f2f0; --editorial-red:#b8372d; --background:var(--surface); --foreground:var(--ink); --radius:16px;
+}

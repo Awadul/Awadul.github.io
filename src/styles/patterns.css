@@ -1,0 +1,7 @@
+/* Swiss International: texture patterns. Flat depth, no shadows. Use on white or muted, never on black or red. */
+.swiss-grid-pattern { background-image: linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px); background-size: 24px 24px; }
+.swiss-dots { background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px); background-size: 16px 16px; }
+.swiss-diagonal { background-image: repeating-linear-gradient(45deg, rgba(0,0,0,.02) 0 1px, transparent 1px 10px); }
+/* Paper grain sits behind everything, so solid black and red sections stay clean. */
+body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .015;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
