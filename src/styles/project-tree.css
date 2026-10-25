@@ -1,0 +1,6 @@
+.project-tree { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+.project-tree > img { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); width:min(96%,980px); height:92%; object-fit:contain; object-position:center bottom; opacity:.66; }
+.project-tree > canvas { position:absolute; inset:0; width:100%; height:100%; }
+.garden-still { display:flex; justify-content:center; align-items:center; min-height:220px; padding:24px; background:#f3f3f0; }
+.garden-still > img { display:block; width:min(100%,680px); height:auto; max-height:400px; object-fit:contain; }
+@media(max-width:640px) { .project-tree > img { width:140%; max-width:none; height:90%; opacity:.52; } }
